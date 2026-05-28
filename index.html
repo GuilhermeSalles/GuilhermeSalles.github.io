@@ -20,7 +20,7 @@
     <meta property="og:title" content="Guilherme Baltazar | Software Architect">
     <meta property="og:description"
         content="Especialista em processamento de dados massivos e sistemas. Explore meus projetos e expertise técnica.">
-    <meta property="og:image" content="https://guilhermesalles.github.io/assets/img/perfil.png">
+    <meta property="og:image" content="https://guilhermesalles.github.io/">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
@@ -28,7 +28,7 @@
     <meta property="twitter:title" content="Guilherme Baltazar | Software Architect">
     <meta property="twitter:description"
         content="Engenheiro de Software Pleno focado em performance e escalabilidade. Confira meu portfólio.">
-    <meta property="twitter:image" content="https://guilhermesalles.github.io/assets/img/perfil.png">
+    <meta property="twitter:image" content="https://guilhermesalles.github.io/">
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="assets/img/icon.png" type="image/x-icon">
@@ -68,9 +68,27 @@
                     <span>EN</span>
                 </div>
                 <a href="#contact" class="nav-cta" data-pt="Fale comigo" data-en="Contact me">Fale comigo</a>
+                <!-- Hamburger — mobile only -->
+                <button class="nav-burger" id="nav-burger" aria-label="Abrir menu" aria-expanded="false">
+                    <span></span><span></span><span></span>
+                </button>
             </div>
         </nav>
     </header>
+
+    <!-- Mobile full-screen drawer -->
+    <div class="nav-drawer" id="nav-drawer" role="dialog" aria-modal="true" aria-label="Menu">
+        <button class="nav-drawer-close" id="nav-drawer-close" aria-label="Fechar menu">✕</button>
+        <ul>
+            <li><a href="#about" data-pt="Sobre" data-en="About">Sobre</a></li>
+            <li><a href="#stack" data-pt="Tecnologias" data-en="Techs">Tecnologias</a></li>
+            <li><a href="#timeline" data-pt="Carreira" data-en="Career">Carreira</a></li>
+            <li><a href="#projects" data-pt="Projetos" data-en="Projects">Projetos</a></li>
+        </ul>
+        <div class="nav-drawer-cta">
+            <a href="#contact" data-pt="Fale comigo" data-en="Contact me">Fale comigo</a>
+        </div>
+    </div>
 
     <main>
         <!-- HERO -->
@@ -81,7 +99,7 @@
                         data-en="Available for new projects">Disponível para novos projetos</div>
                     <h1 class="hero-title reveal">
                         Guilherme <span class="accent">Baltazar</span><br>
-                        <span class="dim">Software Architect</span>
+                        <span class="dim">Software Engineer</span>
                     </h1>
                     <p class="hero-subtitle reveal"
                         data-pt="Engenheiro de Software Pleno especializado em sistemas, processamento de dados em larga escala e arquiteturas modernas."
@@ -126,9 +144,9 @@
                     </div>
                     <div class="about-text">
                         <span class="section-label reveal" data-pt="01. Perfil" data-en="01. Profile">01. Perfil</span>
-                        <h2 class="section-title reveal" data-pt="Engenharia de Software com Excelência Técnica."
+                        <h2 class="section-title reveal" data-pt="Engenharia de Software com Excelência."
                             data-en="Software Engineering with Technical Excellence.">Engenharia de Software com
-                            Excelência Técnica.</h2>
+                            Excelência.</h2>
 
                         <p class="reveal"
                             data-pt="Sou Guilherme Baltazar, Bacharel em Ciência da Computação com mais de 7 anos de experiência construindo o backbone de sistemas críticos. Minha trajetória é marcada pela rápida evolução: pulei o cargo júnior devido ao alto desempenho técnico e hoje atuo como Desenvolvedor Pleno em uma multinacional."
@@ -264,8 +282,8 @@
                         <div class="time-dot"></div>
                         <div class="time-content">
                             <span class="time-year">Dez 2024 — Presente</span>
-                            <h3 data-pt="Desenvolvedor Java Pleno @ Cast Group"
-                                data-en="Mid-level Java Developer @ Cast Group">Desenvolvedor Java Pleno @ Cast Group
+                            <h3 data-pt="Desenvolvedor Java Pleno - Cast Group"
+                                data-en="Mid-level Java Developer - Cast Group">Desenvolvedor Java Pleno - Cast Group
                             </h3>
                             <p class="time-location">Remoto · Multinacional</p>
                             <div class="time-details">
@@ -298,8 +316,8 @@
                         <div class="time-dot"></div>
                         <div class="time-content">
                             <span class="time-year">Ago 2023 — Dez 2024</span>
-                            <h3 data-pt="Analista de Sistemas @ Fundação FUMEC"
-                                data-en="Systems Analyst @ FUMEC Foundation">Analista de Sistemas @ Fundação FUMEC</h3>
+                            <h3 data-pt="Analista de Sistemas - Fundação FUMEC"
+                                data-en="Systems Analyst - FUMEC Foundation">Analista de Sistemas - Fundação FUMEC</h3>
                             <p class="time-location">Campinas, SP</p>
                             <div class="time-details">
                                 <p data-pt="Promoção após destaque técnico. Foco na modernização da infraestrutura de TI e evolução de sistemas internos críticos."
@@ -326,8 +344,8 @@
                         <div class="time-dot"></div>
                         <div class="time-content">
                             <span class="time-year">Set 2021 — Ago 2023</span>
-                            <h3 data-pt="Técnico de Suporte em TI @ CEPROCAMP / FUMEC"
-                                data-en="IT Support Technician @ CEPROCAMP / FUMEC">Técnico de Suporte em TI @ CEPROCAMP
+                            <h3 data-pt="Técnico de Suporte em TI - CEPROCAMP / FUMEC"
+                                data-en="IT Support Technician - CEPROCAMP / FUMEC">Técnico de Suporte em TI - CEPROCAMP
                                 / FUMEC</h3>
                             <div class="time-details">
                                 <ul class="timeline-bullets">
@@ -349,8 +367,8 @@
                         <div class="time-dot"></div>
                         <div class="time-content">
                             <span class="time-year">Set 2019 — Set 2021</span>
-                            <h3 data-pt="Estagiário em TI @ CEPROCAMP" data-en="IT Intern @ CEPROCAMP">Estagiário em TI
-                                @ CEPROCAMP</h3>
+                            <h3 data-pt="Estagiário em TI - CEPROCAMP" data-en="IT Intern - CEPROCAMP">Estagiário em TI
+                                - CEPROCAMP</h3>
                             <div class="time-details">
                                 <ul class="timeline-bullets">
                                     <li data-pt="Criação do portal institucional que capturou 1.735 leads em apenas uma semana (recorde institucional)."
@@ -373,8 +391,8 @@
                             <span class="time-year">2019 — 2022</span>
                             <h3 data-pt="Bacharel em Ciência da Computação" data-en="B.S. in Computer Science">Bacharel
                                 em Ciência da Computação</h3>
-                            <p class="time-location" data-pt="Formação Superior Completa"
-                                data-en="Higher Education Degree">Formação Superior Completa</p>
+                            <p class="time-location" data-pt="Formação Superior Completa - UNIP"
+                                data-en="Higher Education Degree - UNIP">Formação Superior Completa - UNIP</p>
                             <div class="time-details">
                                 <p data-pt="Base acadêmica sólida voltada para a resolução de problemas complexos e engenharia de alto nível. Durante o curso, já aplicava os conceitos teóricos em projetos reais de mercado."
                                     data-en="Solid academic foundation focused on complex problem solving and high-level engineering. During the degree, theoretical concepts were already applied to real market projects.">
