@@ -13,6 +13,7 @@
         content="Guilherme Baltazar, Software Engineer, Java Developer, Spring Boot, Node.js, Software Architect, Portfólio, Backend Developer">
     <meta name="author" content="Guilherme Baltazar">
     <link rel="canonical" href="https://guilhermesalles.github.io/">
+    <meta name="theme-color" content="#000000">
 
     <!-- Open Graph / Facebook / WhatsApp -->
     <meta property="og:type" content="website">
@@ -52,6 +53,8 @@
     <div class="noise-overlay"></div>
     <div class="spotlight"></div>
 
+    <div id="scroll-progress" aria-hidden="true"></div>
+
     <header id="header">
         <nav class="container">
             <a href="#hero" class="logo">GB<span>.</span></a>
@@ -64,7 +67,7 @@
                 </ul>
                 <div class="lang-switch-wrap">
                     <span>PT</span>
-                    <button class="lang-switch" id="lang-toggle"><span class="switch-dot"></span></button>
+                    <button class="lang-switch" id="lang-toggle" aria-label="Alternar idioma"><span class="switch-dot"></span></button>
                     <span>EN</span>
                 </div>
                 <a href="#contact" class="nav-cta" data-pt="Fale comigo" data-en="Contact me">Fale comigo</a>
@@ -111,7 +114,7 @@
                         <a href="#projects" class="btn primary" data-pt="Ver Portfólio" data-en="View Portfolio">Ver
                             Portfólio</a>
                         <a href="https://wa.me/5519983223688?text=Ol%C3%A1%20Guilherme%2C%20vi%20seu%20portf%C3%B3lio%20e%20gostaria%20de%20conversar%21"
-                            class="btn secondary">WhatsApp</a>
+                            class="btn secondary" target="_blank" rel="noopener noreferrer">WhatsApp</a>
                     </div>
                 </div>
                 <div class="hero-counters reveal">
@@ -432,7 +435,7 @@
                     <!-- Bewear -->
                     <article class="project-card glass reveal">
                         <div class="project-image">
-                            <img src="assets/img/bewear.png" alt="Bewear Bootcamp" class="pj-img">
+                            <img src="assets/img/bewear.png" alt="Bewear Bootcamp" class="pj-img" loading="lazy" decoding="async">
                         </div>
                         <div class="project-content">
                             <div class="project-tags"><span>React</span> <span>CSS Modules</span></div>
@@ -440,11 +443,11 @@
                             <p data-pt="Projeto de bootcamp focado em UI/UX moderno e componentes escaláveis."
                                 data-en="Bootcamp project focused on modern UI/UX and scalable components.">Projeto de
                                 bootcamp focado em UI/UX moderno e componentes escaláveis.</p>
-                            <div style="display: flex; gap: 1rem;">
-                                <a href="https://bewear-bootcamp-indol.vercel.app/" target="_blank"
+                            <div class="project-actions">
+                                <a href="https://bewear-bootcamp-indol.vercel.app/" target="_blank" rel="noopener noreferrer"
                                     class="project-link">View Site</a>
                                 <a href="https://www.linkedin.com/feed/update/urn:li:activity:7361797807093035009/"
-                                    target="_blank" class="project-link">LinkedIn Post</a>
+                                    target="_blank" rel="noopener noreferrer" class="project-link">LinkedIn Post</a>
                             </div>
                         </div>
                     </article>
@@ -452,7 +455,7 @@
                     <!-- Totem -->
                     <article class="project-card glass reveal">
                         <div class="project-image">
-                            <img src="assets/img/totem.png" alt="Fast-Food Totem" class="pj-img">
+                            <img src="assets/img/totem.png" alt="Fast-Food Totem" class="pj-img" loading="lazy" decoding="async">
                         </div>
                         <div class="project-content">
                             <div class="project-tags"><span>Next.js</span> <span>UI/UX</span> <span>Bootcamp</span>
@@ -461,11 +464,11 @@
                             <p data-pt="Interface de autoatendimento inspirada no McDonald's desenvolvida durante bootcamp."
                                 data-en="Self-service interface inspired by McDonald's developed during bootcamp.">
                                 Interface de autoatendimento inspirada no McDonald's desenvolvida durante bootcamp.</p>
-                            <div style="display: flex; gap: 1rem;">
-                                <a href="https://totem-donalds-53r4.vercel.app/" target="_blank"
+                            <div class="project-actions">
+                                <a href="https://totem-donalds-53r4.vercel.app/" target="_blank" rel="noopener noreferrer"
                                     class="project-link">View Site</a>
                                 <a href="https://www.linkedin.com/feed/update/urn:li:activity:7414662666687877120/"
-                                    target="_blank" class="project-link">LinkedIn Post</a>
+                                    target="_blank" rel="noopener noreferrer" class="project-link">LinkedIn Post</a>
                             </div>
                         </div>
                     </article>
@@ -473,7 +476,7 @@
                     <!-- Cookieland -->
                     <article class="project-card glass reveal">
                         <div class="project-image">
-                            <img src="assets/img/cookie.png" alt="Cookieland UK" class="pj-img">
+                            <img src="assets/img/cookie.png" alt="Cookieland UK" class="pj-img" loading="lazy" decoding="async">
                         </div>
                         <div class="project-content">
                             <div class="project-tags"><span>React</span> <span>Node</span> <span>UK</span></div>
@@ -481,14 +484,14 @@
                             <p data-pt="E-commerce completo para cookie shop na Irlanda do Norte."
                                 data-en="Full e-commerce for a cookie shop in Northern Ireland.">E-commerce completo
                                 para cookie shop na Irlanda do Norte.</p>
-                            <a href="https://cookieland.uk/" target="_blank" class="project-link">View Site</a>
+                            <a href="https://cookieland.uk/" target="_blank" rel="noopener noreferrer" class="project-link">View Site</a>
                         </div>
                     </article>
 
                     <!-- Big Pizza -->
                     <article class="project-card glass reveal">
                         <div class="project-image">
-                            <img src="assets/img/bigpizza.png" alt="Big Pizza Site" class="pj-img">
+                            <img src="assets/img/bigpizza.png" alt="Big Pizza Site" class="pj-img" loading="lazy" decoding="async">
                         </div>
                         <div class="project-content">
                             <div class="project-tags"><span>Next.js</span> <span>Stripe</span> <span>UK</span></div>
@@ -496,11 +499,11 @@
                             <p data-pt="Site institucional e sistema de pedidos para a pizzaria do Tomas na Irlanda."
                                 data-en="Institutional site and ordering system for Tomas's pizzeria in Ireland.">Site
                                 institucional e sistema de pedidos para a pizzaria do Tomas na Irlanda.</p>
-                            <div style="display: flex; gap: 1rem;">
-                                <a href="projects/big-pizza/index.html" target="_blank" class="project-link">View
+                            <div class="project-actions">
+                                <a href="projects/big-pizza/index.html" target="_blank" rel="noopener noreferrer" class="project-link">View
                                     Site</a>
                                 <a href="https://www.linkedin.com/feed/update/urn:li:activity:7264331031468498944/"
-                                    target="_blank" class="project-link">LinkedIn Post</a>
+                                    target="_blank" rel="noopener noreferrer" class="project-link">LinkedIn Post</a>
                             </div>
                         </div>
                     </article>
@@ -508,7 +511,7 @@
                     <!-- Java Ecommerce -->
                     <article class="project-card glass reveal">
                         <div class="project-image">
-                            <img src="assets/img/java-ecommerce.png" alt="Java Ecommerce Backend" class="pj-img">
+                            <img src="assets/img/java-ecommerce.png" alt="Java Ecommerce Backend" class="pj-img" loading="lazy" decoding="async">
                         </div>
                         <div class="project-content">
                             <div class="project-tags"><span>Java</span> <span>Spring Boot</span> <span>JPA</span></div>
@@ -516,11 +519,11 @@
                             <p data-pt="Arquitetura robusta de backend para vendas escaláveis com Spring."
                                 data-en="Robust backend architecture for scalable sales with Spring.">Arquitetura
                                 robusta de backend para vendas escaláveis com Spring.</p>
-                            <div style="display: flex; gap: 1rem;">
-                                <a href="https://github.com/GuilhermeSalles/Java-Ecommerce" target="_blank"
+                            <div class="project-actions">
+                                <a href="https://github.com/GuilhermeSalles/Java-Ecommerce" target="_blank" rel="noopener noreferrer"
                                     class="project-link">GitHub</a>
                                 <a href="https://www.linkedin.com/feed/update/urn:li:activity:7433136665193463809/"
-                                    target="_blank" class="project-link">LinkedIn Post</a>
+                                    target="_blank" rel="noopener noreferrer" class="project-link">LinkedIn Post</a>
                             </div>
                         </div>
                     </article>
@@ -528,7 +531,7 @@
                     <!-- Site Crochê -->
                     <article class="project-card glass reveal">
                         <div class="project-image">
-                            <img src="assets/img/croche.png" alt="Site de Crochê" class="pj-img">
+                            <img src="assets/img/croche.png" alt="Site de Crochê" class="pj-img" loading="lazy" decoding="async">
                         </div>
                         <div class="project-content">
                             <div class="project-tags"><span>HTML/CSS</span> <span>JavaScript</span> <span>BR</span>
@@ -537,14 +540,14 @@
                             <p data-pt="Vitrine digital para exposição de trabalhos manuais e CTA de vendas."
                                 data-en="Digital showcase for displaying handicrafts and sales CTA.">Vitrine digital
                                 para exposição de trabalhos manuais e CTA de vendas.</p>
-                            <a href="projects/croche/index.html" target="_blank" class="project-link">View Site</a>
+                            <a href="projects/croche/index.html" target="_blank" rel="noopener noreferrer" class="project-link">View Site</a>
                         </div>
                     </article>
 
                     <!-- Dentista -->
                     <article class="project-card glass reveal">
                         <div class="project-image">
-                            <img src="assets/img/dentista.png" alt="Site de Dentista" class="pj-img">
+                            <img src="assets/img/dentista.png" alt="Site de Dentista" class="pj-img" loading="lazy" decoding="async">
                         </div>
                         <div class="project-content">
                             <div class="project-tags"><span>HTML/CSS</span> <span>JavaScript</span></div>
@@ -552,14 +555,14 @@
                             <p data-pt="Presença digital profissional para clínica odontológica."
                                 data-en="Professional digital presence for a dental clinic.">Presença digital
                                 profissional para clínica odontológica.</p>
-                            <a href="projects/dentista/index.html" target="_blank" class="project-link">View Site</a>
+                            <a href="projects/dentista/index.html" target="_blank" rel="noopener noreferrer" class="project-link">View Site</a>
                         </div>
                     </article>
 
                     <!-- Calhas Taquaral -->
                     <article class="project-card glass reveal">
                         <div class="project-image">
-                            <img src="assets/img/calhasTaquaral.png" alt="Calhas Taquaral" class="pj-img">
+                            <img src="assets/img/calhasTaquaral.png" alt="Calhas Taquaral" class="pj-img" loading="lazy" decoding="async">
                         </div>
                         <div class="project-content">
                             <div class="project-tags"><span>HTML/CSS</span> <span>JS</span> <span>BR</span></div>
@@ -567,11 +570,11 @@
                             <p data-pt="Site institucional otimizado para o setor de construção civil."
                                 data-en="Institutional site optimized for the construction sector.">Site institucional
                                 otimizado para o setor de construção civil.</p>
-                            <div style="display: flex; gap: 1rem;">
-                                <a href="https://www.calhastaquaral.com.br/" target="_blank" class="project-link">View
+                            <div class="project-actions">
+                                <a href="https://www.calhastaquaral.com.br/" target="_blank" rel="noopener noreferrer" class="project-link">View
                                     Site</a>
                                 <a href="https://www.linkedin.com/feed/update/urn:li:activity:7265083350241923072/"
-                                    target="_blank" class="project-link">LinkedIn Post</a>
+                                    target="_blank" rel="noopener noreferrer" class="project-link">LinkedIn Post</a>
                             </div>
                         </div>
                     </article>
@@ -587,11 +590,11 @@
                             <p data-pt="Sistema de gerenciamento e agendamento de transmissões ao vivo."
                                 data-en="System for management and scheduling of live streams.">Sistema de gerenciamento
                                 e agendamento de transmissões ao vivo.</p>
-                            <div style="display: flex; gap: 1rem;">
-                                <a href="https://github.com/GuilhermeSalles/Agenda-de-Lives" target="_blank"
+                            <div class="project-actions">
+                                <a href="https://github.com/GuilhermeSalles/Agenda-de-Lives" target="_blank" rel="noopener noreferrer"
                                     class="project-link">GitHub</a>
                                 <a href="https://www.linkedin.com/feed/update/urn:li:activity:7267951969430876160/"
-                                    target="_blank" class="project-link">LinkedIn Post</a>
+                                    target="_blank" rel="noopener noreferrer" class="project-link">LinkedIn Post</a>
                             </div>
                         </div>
                     </article>
@@ -599,7 +602,7 @@
                     <!-- DSList Frontend -->
                     <article class="project-card glass reveal">
                         <div class="project-image">
-                            <img src="assets/img/dslist-front.png" alt="DSList Frontend" class="pj-img">
+                            <img src="assets/img/dslist-front.png" alt="DSList Frontend" class="pj-img" loading="lazy" decoding="async">
                         </div>
                         <div class="project-content">
                             <div class="project-tags"><span>React</span> <span>TypeScript</span> <span>UI/UX</span>
@@ -608,11 +611,11 @@
                             <p data-pt="Interface moderna e responsiva para listagem de games, integrada a uma API robusta."
                                 data-en="Modern and responsive interface for game listing, integrated with a robust API.">
                                 Interface moderna e responsiva para listagem de games, integrada a uma API robusta.</p>
-                            <div style="display: flex; gap: 1rem;">
-                                <a href="https://github.com/GuilhermeSalles/DS-List-Front" target="_blank"
+                            <div class="project-actions">
+                                <a href="https://github.com/GuilhermeSalles/DS-List-Front" target="_blank" rel="noopener noreferrer"
                                     class="project-link">GitHub</a>
                                 <a href="https://www.linkedin.com/feed/update/urn:li:activity:7266118302643408897/"
-                                    target="_blank" class="project-link">LinkedIn Post</a>
+                                    target="_blank" rel="noopener noreferrer" class="project-link">LinkedIn Post</a>
                             </div>
                         </div>
                     </article>
@@ -620,7 +623,7 @@
                     <!-- DSList Backend -->
                     <article class="project-card glass reveal">
                         <div class="project-image">
-                            <img src="assets/img/gifdslist.gif" alt="DSList Backend API" class="pj-img">
+                            <img src="assets/img/gifdslist.gif" alt="DSList Backend API" class="pj-img" loading="lazy" decoding="async">
                         </div>
                         <div class="project-content">
                             <div class="project-tags"><span>Java</span> <span>Spring Boot</span> <span>PostgreSQL</span>
@@ -629,11 +632,11 @@
                             <p data-pt="API REST otimizada para ranking e categorização de games com persistência de dados."
                                 data-en="REST API optimized for game ranking and categorization with data persistence.">
                                 API REST otimizada para ranking e categorização de games com persistência de dados.</p>
-                            <div style="display: flex; gap: 1rem;">
-                                <a href="https://github.com/GuilhermeSalles/DSList" target="_blank"
+                            <div class="project-actions">
+                                <a href="https://github.com/GuilhermeSalles/DSList" target="_blank" rel="noopener noreferrer"
                                     class="project-link">GitHub</a>
                                 <a href="https://www.linkedin.com/feed/update/urn:li:activity:7266118302643408897/"
-                                    target="_blank" class="project-link">LinkedIn Post</a>
+                                    target="_blank" rel="noopener noreferrer" class="project-link">LinkedIn Post</a>
                             </div>
                         </div>
                     </article>
@@ -653,7 +656,7 @@
                                 Implementação de otimizações de alta performance para processamento batch em larga
                                 escala.</p>
                             <a href="https://www.linkedin.com/feed/update/urn:li:activity:7420208988769882114/"
-                                target="_blank" class="project-link">LinkedIn Post</a>
+                                target="_blank" rel="noopener noreferrer" class="project-link">LinkedIn Post</a>
                         </div>
                     </article>
 
@@ -668,7 +671,7 @@
                             <p data-pt="Sistema de vendas robusto desenvolvido com framework Laravel."
                                 data-en="Robust sales system developed with the Laravel framework.">Sistema de vendas
                                 robusto desenvolvido com framework Laravel.</p>
-                            <a href="https://github.com/GuilhermeSalles/Projeto-site-de-vendas" target="_blank"
+                            <a href="https://github.com/GuilhermeSalles/Projeto-site-de-vendas" target="_blank" rel="noopener noreferrer"
                                 class="project-link">GitHub</a>
                         </div>
                     </article>
@@ -684,11 +687,11 @@
                     <h2 class="section-title" data-pt="Vamos criar algo grande?" data-en="Let's build something big?">
                         Vamos criar algo grande?</h2>
                     <div class="contact-links">
-                        <a href="https://www.linkedin.com/in/guilhermebaltazar-v/" target="_blank">LinkedIn</a>
-                        <a href="https://github.com/GuilhermeSalles" target="_blank">GitHub</a>
+                        <a href="https://www.linkedin.com/in/guilhermebaltazar-v/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                        <a href="https://github.com/GuilhermeSalles" target="_blank" rel="noopener noreferrer">GitHub</a>
                         <a href="mailto:guibaltazarvs@hotmail.com">Email</a>
                         <a href="https://wa.me/5519983223688?text=Ol%C3%A1%20Guilherme%2C%20vi%20seu%20portf%C3%B3lio%20e%20gostaria%20de%20conversar%21"
-                            class="accent-link">WhatsApp</a>
+                            class="accent-link" target="_blank" rel="noopener noreferrer">WhatsApp</a>
                     </div>
                 </div>
             </div>
@@ -700,6 +703,12 @@
             <p>© 2026 Guilherme Baltazar.</p>
         </div>
     </footer>
+
+    <button id="back-to-top" class="back-to-top" aria-label="Voltar ao topo">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
+        </svg>
+    </button>
 
     <script src="assets/js/main.js"></script>
 </body>

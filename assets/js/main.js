@@ -129,16 +129,38 @@ const initScrollSpy = () => {
 
 // Mouse Spotlight Tracking
 const initSpotlight = () => {
+  if (window.matchMedia("(hover: none)").matches) return;
   const spotlight = document.querySelector(".spotlight");
   window.addEventListener(
     "mousemove",
     (e) => {
-      const x = e.clientX;
-      const y = e.clientY;
-      spotlight.style.transform = `translate(${x - 300}px, ${y - 300}px)`;
+      spotlight.style.transform = `translate(${e.clientX - 300}px, ${e.clientY - 300}px)`;
     },
     { passive: true },
   );
+};
+
+// Scroll Progress Bar
+const initScrollProgress = () => {
+  const bar = document.getElementById("scroll-progress");
+  if (!bar) return;
+  window.addEventListener("scroll", () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = docHeight > 0 ? (scrollTop / docHeight) * 100 + "%" : "0%";
+  }, { passive: true });
+};
+
+// Back to Top
+const initBackToTop = () => {
+  const btn = document.getElementById("back-to-top");
+  if (!btn) return;
+  window.addEventListener("scroll", () => {
+    btn.classList.toggle("visible", window.scrollY > 400);
+  }, { passive: true });
+  btn.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
 };
 
 // Mobile Hamburger Menu
@@ -195,6 +217,8 @@ document.addEventListener("DOMContentLoaded", () => {
   initLanguage();
   initScrollSpy();
   initMobileMenu();
+  initScrollProgress();
+  initBackToTop();
 
   // Smooth scroll offset
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {

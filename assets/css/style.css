@@ -185,6 +185,11 @@ nav {
   text-decoration: none;
   font-weight: 700;
   font-size: 0.85rem;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.nav-cta:hover {
+  opacity: 0.85;
+  transform: translateY(-1px);
 }
 
 /* Titles Architecture */
@@ -263,6 +268,10 @@ nav {
 .btn.secondary {
   border: 1px solid var(--border);
   color: white;
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+.btn.secondary:hover {
+  border-color: var(--accent);
 }
 .btn:hover {
   transform: translateY(-3px);
@@ -984,5 +993,80 @@ footer {
   }
   .contact-links a {
     font-size: 1.1rem;
+  }
+}
+
+/* ================================================================
+   SCROLL PROGRESS BAR
+================================================================ */
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  background: var(--accent);
+  z-index: 2000;
+  transition: width 0.1s linear;
+  box-shadow: 0 0 8px var(--accent-glow);
+}
+
+/* ================================================================
+   BACK TO TOP BUTTON
+================================================================ */
+.back-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 44px;
+  height: 44px;
+  background: var(--accent);
+  border: none;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.3s ease, transform 0.3s ease, background 0.2s ease;
+  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
+  pointer-events: none;
+}
+.back-to-top.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.back-to-top:hover {
+  background: #2563eb;
+  transform: translateY(-2px);
+}
+
+/* ================================================================
+   PROJECT ACTIONS
+================================================================ */
+.project-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+/* ================================================================
+   FOCUS VISIBLE — keyboard accessibility
+================================================================ */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ================================================================
+   SPOTLIGHT — disable on touch devices
+================================================================ */
+@media (hover: none) {
+  .spotlight {
+    display: none;
   }
 }
