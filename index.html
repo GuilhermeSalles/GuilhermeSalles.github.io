@@ -96,11 +96,16 @@
     <main>
         <!-- HERO -->
         <section id="hero">
-            <div class="container">
+            <div class="hero-bg" aria-hidden="true">
+                <span class="orb orb-1"></span>
+                <span class="orb orb-2"></span>
+                <span class="orb orb-3"></span>
+            </div>
+            <div class="container hero-inner">
                 <div class="hero-content">
                     <div class="status-pill reveal" data-pt="Disponível para novos projetos"
                         data-en="Available for new projects">Disponível para novos projetos</div>
-                    <h1 class="hero-title reveal">
+                    <h1 class="hero-title" id="hero-title">
                         Guilherme <span class="accent">Baltazar</span><br>
                         <span class="dim">Software Engineer</span>
                     </h1>
@@ -133,6 +138,9 @@
                         <label data-pt="Países" data-en="Countries">Países</label>
                     </div>
                 </div>
+            </div>
+            <div class="scroll-cue" aria-hidden="true">
+                <span class="scroll-cue-wheel"></span>
             </div>
         </section>
 

@@ -17,10 +17,9 @@ const sr = ScrollReveal({
   },
 });
 
-// Reveal Targets
+// Reveal Targets (hero title now uses its own word-by-word animation)
 sr.reveal(".reveal", { interval: 100 });
 sr.reveal(".status-pill", { delay: 300 });
-sr.reveal(".hero-title", { delay: 500, distance: "100px" });
 sr.reveal(".hero-subtitle", { delay: 700 });
 sr.reveal(".hero-actions", { delay: 900 });
 sr.reveal(".counter-card", { interval: 200, delay: 1100, scale: 0.9 });
@@ -163,6 +162,191 @@ const initBackToTop = () => {
   });
 };
 
+// ============================================================
+// APPLE-GRADE MOTION LAYER
+// ============================================================
+const prefersReducedMotion = window.matchMedia(
+  "(prefers-reduced-motion: reduce)",
+).matches;
+const isTouchDevice = window.matchMedia("(hover: none)").matches;
+
+// Hero title — split into words for staggered blur-up reveal
+const initHeroTitle = () => {
+  const title = document.getElementById("hero-title");
+  if (!title || prefersReducedMotion) return;
+
+  let wordIndex = 0;
+  const wrapWords = (node) => {
+    if (node.nodeType === Node.TEXT_NODE) {
+      const words = node.textContent.split(/(\s+)/);
+      const frag = document.createDocumentFragment();
+      words.forEach((part) => {
+        if (part.trim() === "") {
+          frag.appendChild(document.createTextNode(part));
+        } else {
+          const span = document.createElement("span");
+          span.className = "word";
+          span.style.setProperty("--i", wordIndex++);
+          span.textContent = part;
+          frag.appendChild(span);
+        }
+      });
+      node.parentNode.replaceChild(frag, node);
+    } else if (node.nodeType === Node.ELEMENT_NODE && node.tagName !== "BR") {
+      [...node.childNodes].forEach(wrapWords);
+    }
+  };
+  [...title.childNodes].forEach(wrapWords);
+};
+
+// Header — frosted glass + shrink on scroll
+const initHeaderScroll = () => {
+  const header = document.getElementById("header");
+  if (!header) return;
+  const onScroll = () => {
+    header.classList.toggle("scrolled", window.scrollY > 24);
+  };
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+};
+
+// Hero — subtle parallax fade-out on scroll (Apple product-page style)
+const initHeroParallax = () => {
+  if (prefersReducedMotion) return;
+  const heroInner = document.querySelector(".hero-inner");
+  const scrollCue = document.querySelector(".scroll-cue");
+  if (!heroInner) return;
+
+  let ticking = false;
+  const update = () => {
+    const y = window.scrollY;
+    const vh = window.innerHeight;
+    if (y <= vh) {
+      const progress = y / vh;
+      heroInner.style.transform = `translateY(${(progress * 70).toFixed(1)}px) scale(${(1 - progress * 0.04).toFixed(4)})`;
+      heroInner.style.opacity = Math.max(0, 1 - progress * 1.25).toFixed(3);
+    }
+    if (scrollCue) scrollCue.classList.toggle("hidden", y > 60);
+    ticking = false;
+  };
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    },
+    { passive: true },
+  );
+};
+
+// Glass cards — glow that follows the cursor
+const initCardGlow = () => {
+  if (isTouchDevice || prefersReducedMotion) return;
+  document.querySelectorAll(".glass").forEach((card) => {
+    card.addEventListener(
+      "mousemove",
+      (e) => {
+        const r = card.getBoundingClientRect();
+        card.style.setProperty("--mx", `${e.clientX - r.left}px`);
+        card.style.setProperty("--my", `${e.clientY - r.top}px`);
+      },
+      { passive: true },
+    );
+  });
+};
+
+// Project cards — 3D tilt (Apple TV style)
+const initTilt = () => {
+  if (isTouchDevice || prefersReducedMotion) return;
+  document.querySelectorAll(".project-card").forEach((card) => {
+    let raf = null;
+    card.addEventListener(
+      "mousemove",
+      (e) => {
+        if (raf) return;
+        raf = requestAnimationFrame(() => {
+          const r = card.getBoundingClientRect();
+          const x = (e.clientX - r.left) / r.width - 0.5;
+          const y = (e.clientY - r.top) / r.height - 0.5;
+          card.style.transform = `perspective(900px) rotateX(${(-y * 4).toFixed(2)}deg) rotateY(${(x * 5).toFixed(2)}deg) translateY(-4px)`;
+          raf = null;
+        });
+      },
+      { passive: true },
+    );
+    card.addEventListener("mouseleave", () => {
+      card.style.transform = "";
+    });
+  });
+};
+
+// Buttons — magnetic pull toward the cursor
+const initMagnetic = () => {
+  if (isTouchDevice || prefersReducedMotion) return;
+  document.querySelectorAll(".btn, .nav-cta").forEach((el) => {
+    el.addEventListener(
+      "mousemove",
+      (e) => {
+        const r = el.getBoundingClientRect();
+        const x = (e.clientX - r.left - r.width / 2) * 0.22;
+        const y = (e.clientY - r.top - r.height / 2) * 0.35;
+        el.style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px)`;
+      },
+      { passive: true },
+    );
+    el.addEventListener("mouseleave", () => {
+      el.style.transform = "";
+    });
+  });
+};
+
+// Timeline — line draws itself as you scroll, dots light up
+const initTimelineProgress = () => {
+  const track = document.querySelector(".timeline-track");
+  if (!track) return;
+
+  let ticking = false;
+  const update = () => {
+    const rect = track.getBoundingClientRect();
+    const trigger = window.innerHeight * 0.7;
+    const progress = Math.min(
+      100,
+      Math.max(0, ((trigger - rect.top) / rect.height) * 100),
+    );
+    track.style.setProperty("--tl-progress", `${progress.toFixed(1)}%`);
+    ticking = false;
+  };
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    },
+    { passive: true },
+  );
+  update();
+
+  // Light up dots as items enter the viewport
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("lit");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.3, rootMargin: "0px 0px -15% 0px" },
+  );
+  document
+    .querySelectorAll(".timeline-item")
+    .forEach((item) => observer.observe(item));
+};
+
 // Mobile Hamburger Menu
 const initMobileMenu = () => {
   const burger = document.getElementById("nav-burger");
@@ -213,6 +397,13 @@ const initMobileMenu = () => {
 
 // Initialization
 document.addEventListener("DOMContentLoaded", () => {
+  initHeroTitle();
+  initHeaderScroll();
+  initHeroParallax();
+  initCardGlow();
+  initTilt();
+  initMagnetic();
+  initTimelineProgress();
   initSpotlight();
   initLanguage();
   initScrollSpy();

@@ -83,9 +83,17 @@ header {
   top: 0;
   width: 100%;
   z-index: 1000;
-  background: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border);
+  background: rgba(0, 0, 0, 0);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border-bottom: 1px solid transparent;
+  transition:
+    background 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+header.scrolled {
+  background: rgba(0, 0, 0, 0.72);
+  border-bottom-color: var(--border);
 }
 
 nav {
@@ -93,6 +101,10 @@ nav {
   justify-content: space-between;
   align-items: center;
   height: 4.5rem;
+  transition: height 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+header.scrolled nav {
+  height: 3.6rem;
 }
 
 .logo {
@@ -258,23 +270,33 @@ nav {
   text-decoration: none;
   font-weight: 700;
   font-size: 0.9rem;
-  transition: 0.3s ease;
+  display: inline-block;
+  transition:
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.35s ease,
+    border-color 0.3s ease,
+    background 0.3s ease;
+  will-change: transform;
 }
 .btn.primary {
   background: var(--accent);
   color: white;
   box-shadow: 0 10px 20px var(--accent-glow);
 }
+.btn.primary:hover {
+  box-shadow: 0 16px 36px rgba(59, 130, 246, 0.35);
+}
 .btn.secondary {
   border: 1px solid var(--border);
   color: white;
-  transition: border-color 0.3s ease, transform 0.3s ease;
 }
 .btn.secondary:hover {
   border-color: var(--accent);
 }
-.btn:hover {
-  transform: translateY(-3px);
+@media (hover: none) {
+  .btn:active {
+    transform: scale(0.97);
+  }
 }
 
 .hero-counters {
@@ -382,6 +404,21 @@ nav {
   width: 1px;
   background: var(--border);
 }
+/* Scroll-drawn progress line */
+.timeline-track::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1px;
+  height: var(--tl-progress, 0%);
+  background: linear-gradient(
+    to bottom,
+    rgba(59, 130, 246, 0.25),
+    var(--accent)
+  );
+  box-shadow: 0 0 12px var(--accent-glow);
+}
 .timeline-item {
   position: relative;
   padding-bottom: 4rem;
@@ -392,9 +429,18 @@ nav {
   top: 0.5rem;
   width: 10px;
   height: 10px;
-  background: var(--accent);
+  background: var(--text-dim);
   border-radius: 50%;
+  box-shadow: none;
+  transition:
+    background 0.6s ease,
+    box-shadow 0.6s ease,
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.timeline-item.lit .time-dot {
+  background: var(--accent);
   box-shadow: 0 0 10px var(--accent);
+  transform: scale(1.25);
 }
 .time-year {
   display: block;
@@ -1068,5 +1114,305 @@ footer {
 @media (hover: none) {
   .spotlight {
     display: none;
+  }
+}
+
+/* ================================================================
+   APPLE-GRADE MOTION LAYER
+================================================================ */
+
+/* ── Hero ambient orbs ── */
+#hero {
+  position: relative;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+#hero .container {
+  position: relative;
+  z-index: 1;
+}
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.35;
+  will-change: transform;
+}
+.orb-1 {
+  width: 480px;
+  height: 480px;
+  top: -10%;
+  right: -8%;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.45), transparent 70%);
+  animation: orbDrift 22s ease-in-out infinite alternate;
+}
+.orb-2 {
+  width: 360px;
+  height: 360px;
+  bottom: 5%;
+  left: -10%;
+  background: radial-gradient(circle, rgba(34, 100, 220, 0.35), transparent 70%);
+  animation: orbDrift 28s ease-in-out infinite alternate-reverse;
+}
+.orb-3 {
+  width: 260px;
+  height: 260px;
+  top: 40%;
+  left: 45%;
+  background: radial-gradient(circle, rgba(120, 170, 255, 0.18), transparent 70%);
+  animation: orbDrift 34s ease-in-out infinite alternate;
+}
+@keyframes orbDrift {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-60px, 50px) scale(1.12);
+  }
+  100% {
+    transform: translate(50px, -40px) scale(0.94);
+  }
+}
+
+/* ── Hero title: word-by-word blur-up reveal ── */
+.hero-title .word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(46px);
+  filter: blur(10px);
+  animation: wordIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: calc(0.3s + var(--i, 0) * 0.09s);
+  will-change: transform, filter;
+}
+@keyframes wordIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+/* Shimmer on the accent name */
+.hero-title .accent,
+.hero-title .accent .word {
+  background: linear-gradient(
+    110deg,
+    #3b82f6 25%,
+    #9ec5ff 42%,
+    #3b82f6 60%
+  );
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: shimmer 7s linear infinite;
+}
+@keyframes shimmer {
+  0% {
+    background-position: 120% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+/* ── Hero parallax target ── */
+.hero-inner {
+  will-change: transform, opacity;
+}
+
+/* ── Scroll cue (Apple-style mouse) ── */
+.scroll-cue {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 26px;
+  height: 42px;
+  border: 1.5px solid var(--border-hover);
+  border-radius: 99px;
+  z-index: 1;
+  opacity: 0;
+  animation: cueFade 1s ease 2.2s forwards;
+  transition: opacity 0.4s ease;
+}
+.scroll-cue.hidden {
+  opacity: 0 !important;
+  pointer-events: none;
+}
+.scroll-cue-wheel {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  width: 3px;
+  height: 8px;
+  margin-left: -1.5px;
+  border-radius: 99px;
+  background: var(--text-secondary);
+  animation: cueScroll 2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+@keyframes cueFade {
+  to {
+    opacity: 0.7;
+  }
+}
+@keyframes cueScroll {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  70% {
+    transform: translateY(12px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+}
+
+/* ── Mouse-tracking glow on glass cards ── */
+.glass {
+  position: relative;
+}
+.glass::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    420px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(120, 170, 255, 0.08),
+    transparent 45%
+  );
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+.glass:hover::after {
+  opacity: 1;
+}
+.glass:hover {
+  border-color: var(--border-hover);
+}
+.stack-item:hover {
+  border-color: var(--accent);
+}
+
+/* ── 3D tilt on project cards ── */
+.project-card {
+  transition:
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.5s ease,
+    border-color 0.4s ease;
+  will-change: transform;
+}
+.project-card:hover {
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.55);
+}
+
+/* ── Stack items: icon lift ── */
+.stack-item i,
+.stack-item svg {
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.stack-item:hover i,
+.stack-item:hover svg {
+  transform: translateY(-4px) scale(1.12);
+}
+
+/* ── Nav CTA: smooth magnetic transition ── */
+.nav-cta {
+  will-change: transform;
+  transition:
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.2s ease;
+}
+
+/* ── Contact links: underline grow instead of plain fade ── */
+.contact-links a {
+  position: relative;
+}
+.contact-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 3px;
+  border-radius: 99px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.contact-links a:hover {
+  opacity: 1;
+  color: var(--accent);
+}
+.contact-links a:hover::after {
+  transform: scaleX(1);
+}
+
+/* ── Mobile adjustments for motion layer ── */
+@media (max-width: 768px) {
+  .scroll-cue {
+    display: none;
+  }
+  .orb {
+    filter: blur(60px);
+    opacity: 0.25;
+  }
+  .orb-1 {
+    width: 300px;
+    height: 300px;
+  }
+  .orb-2 {
+    width: 240px;
+    height: 240px;
+  }
+  .orb-3 {
+    display: none;
+  }
+}
+
+/* ── Reduced motion: respect the user ── */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .hero-title .word {
+    animation: none;
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+  .hero-title .accent {
+    animation: none;
+  }
+  .orb,
+  .scroll-cue,
+  .scroll-cue-wheel {
+    animation: none;
+  }
+  .scroll-cue {
+    opacity: 0.5;
+  }
+  .glass::after {
+    display: none;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
   }
 }
