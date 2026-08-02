@@ -1416,3 +1416,193 @@ footer {
     animation-iteration-count: 1 !important;
   }
 }
+
+/* ================================================================
+   FEATURED PROJECT CARD — wide showcase (MS-Pratice)
+================================================================ */
+.project-card.featured {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  border-color: rgba(59, 130, 246, 0.28);
+}
+/* Cover is a 600x400 screenshot — fit it whole instead of cropping/upscaling */
+.project-card.featured .project-image {
+  height: 100%;
+  min-height: 380px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.75rem;
+  background:
+    radial-gradient(
+      120% 100% at 20% 0%,
+      rgba(59, 130, 246, 0.12),
+      transparent 60%
+    ),
+    #0b0b0f;
+}
+.project-card.featured .pj-img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  /* never scale past the 400px native height — keeps the screenshot sharp */
+  max-height: min(100%, 400px);
+  object-fit: contain;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+}
+.project-card.featured .project-content {
+  padding: 2.6rem;
+  justify-content: center;
+}
+.project-card.featured .project-content h3 {
+  font-size: 1.9rem;
+}
+.project-card.featured .project-content p {
+  flex: 0 0 auto;
+  margin-bottom: 1.6rem;
+}
+.project-card.featured .project-tags {
+  flex-wrap: wrap;
+}
+/* No extra hover on the featured card — same behaviour as every other card */
+.project-card.featured:hover .pj-img {
+  transform: none;
+}
+
+/* Badge over the cover image */
+.project-badge {
+  position: absolute;
+  top: 1.1rem;
+  left: 1.1rem;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 99px;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #dbeafe;
+  background: rgba(10, 20, 40, 0.65);
+  border: 1px solid rgba(59, 130, 246, 0.45);
+  backdrop-filter: blur(10px);
+}
+.project-badge::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 10px var(--accent);
+}
+
+/* Architecture flow strip */
+.arch-flow {
+  display: flex;
+  align-items: stretch;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.6rem;
+}
+.arch-node {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0.5rem 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.02);
+  font-family: ui-monospace, "SFMono-Regular", "Menlo", monospace;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  line-height: 1.35;
+}
+.arch-node i {
+  font-style: normal;
+  font-size: 0.62rem;
+  font-weight: 500;
+  color: var(--text-dim);
+  letter-spacing: 0.02em;
+}
+.arch-node.is-broker {
+  border-color: rgba(59, 130, 246, 0.4);
+  color: #bfdbfe;
+  background: rgba(59, 130, 246, 0.08);
+}
+.arch-arrow {
+  align-self: center;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+}
+/* Highlight bullets */
+.project-facts {
+  list-style: none;
+  display: grid;
+  gap: 0.7rem;
+  margin: 0 0 2rem;
+}
+.project-facts li {
+  position: relative;
+  padding-left: 1.5rem;
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+.project-facts li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 6px;
+  height: 6px;
+  border-radius: 2px;
+  background: var(--accent);
+  transform: rotate(45deg);
+}
+
+/* Featured card — stack below 900px */
+@media (max-width: 900px) {
+  .project-card.featured {
+    grid-template-columns: 1fr;
+  }
+  .project-card.featured .project-image {
+    min-height: 0;
+    height: auto;
+    padding: 1.25rem;
+  }
+  .project-card.featured .project-content {
+    padding: 1.8rem;
+  }
+  .project-card.featured .project-content h3 {
+    font-size: 1.45rem;
+  }
+}
+@media (max-width: 768px) {
+  .project-card.featured .project-image {
+    height: auto;
+    padding: 1rem;
+  }
+  .project-card.featured .project-content {
+    padding: 1.4rem;
+  }
+  .project-card.featured .project-content h3 {
+    font-size: 1.2rem;
+  }
+  .arch-flow {
+    gap: 0.4rem;
+  }
+  .arch-node {
+    font-size: 0.68rem;
+    padding: 0.4rem 0.6rem;
+  }
+  .project-facts li {
+    font-size: 0.84rem;
+  }
+}

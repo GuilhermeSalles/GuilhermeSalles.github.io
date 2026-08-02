@@ -3,7 +3,12 @@
     "allow": [
       "Bash(grep -E \"\\\\.\\(png|jpg|gif|svg|webp|json|xml\\)$\")",
       "WebFetch(domain:github.com)",
-      "WebFetch(domain:raw.githubusercontent.com)"
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(git mv *)",
+      "Bash(mv \"assets/img/Microservice - practice.png\" \"assets/img/ms-pratice.png\")",
+      "Bash(python -c ' *)",
+      "PowerShell(Add-Type -AssemblyName System.Drawing; $i=[System.Drawing.Image]::FromFile\\(\"C:\\\\Projects\\\\Guilherme-Portifólio\\\\GuilhermeSalles.github.io\\\\assets\\\\img\\\\ms-pratice.png\"\\); \"$\\($i.Width\\) x $\\($i.Height\\)  ratio=$\\([math]::Round\\($i.Width/$i.Height,3\\)\\)\"; $i.Dispose\\(\\))",
+      "PowerShell(& \"C:\\\\Users\\\\guiba\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Projects-Guilherme-Portif-lio-GuilhermeSalles-github-io\\\\93b37977-f045-4907-9280-e8bd1d5e5da7\\\\scratchpad\\\\reorder.ps1\")"
     ]
   }
 }

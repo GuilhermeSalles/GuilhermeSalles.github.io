@@ -211,6 +211,26 @@
                         <span>Spring Cloud</span>
                     </div>
 
+                    <!-- Event-Driven & Containers -->
+                    <div class="stack-item glass reveal">
+                        <i class="devicon-apachekafka-original"></i>
+                        <span>Apache Kafka</span>
+                    </div>
+                    <div class="stack-item glass reveal">
+                        <i class="devicon-docker-plain colored"></i>
+                        <span>Docker</span>
+                    </div>
+                    <div class="stack-item glass reveal">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#38bdf8"
+                            stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="4.5" r="2.5" />
+                            <circle cx="4.5" cy="17" r="2.5" />
+                            <circle cx="19.5" cy="17" r="2.5" />
+                            <path d="M10.1 6.4 6.4 14.9M13.9 6.4l3.7 8.5M7 17h10" />
+                        </svg>
+                        <span>Microservices</span>
+                    </div>
+
                     <!-- PHP & Frameworks -->
                     <div class="stack-item glass reveal">
                         <i class="devicon-php-plain colored"></i>
@@ -444,6 +464,178 @@
                     de Projetos</h2>
                 <div class="project-grid">
 
+                    <!-- MS-Pratice — Kafka / Event-Driven / BFF (destaque) -->
+                    <article class="project-card glass reveal featured">
+                        <div class="project-image">
+                            <img src="assets/img/ms-pratice.png" alt="MS-Pratice — painel do BFF exibindo o log de offsets do tópico Kafka"
+                                class="pj-img" loading="lazy" decoding="async">
+                            <span class="project-badge" data-pt="Destaque" data-en="Featured">Destaque</span>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags"><span>Apache Kafka</span> <span>BFF</span>
+                                <span>Microservices</span> <span>Java 21</span> <span>Spring Boot</span>
+                                <span>Docker</span>
+                            </div>
+                            <h3 data-pt="Microserviços" data-en="Microservices">Microserviços</h3>
+                            <p data-pt="Ecossistema orientado a eventos onde cada venda vira um offset no log do Kafka. Um BFF entrega respostas prontas para web e mobile, enquanto produtor e consumidor evoluem desacoplados."
+                                data-en="Event-driven ecosystem where every sale becomes an offset in the Kafka log. A BFF delivers ready-made responses for web and mobile, while producer and consumer evolve fully decoupled.">
+                                Ecossistema orientado a eventos onde cada venda vira um offset no log do Kafka. Um BFF
+                                entrega respostas prontas para web e mobile, enquanto produtor e consumidor evoluem
+                                desacoplados.</p>
+
+                            <div class="arch-flow">
+                                <span class="arch-node">bff-service<i>:8082 · web + mobile</i></span>
+                                <span class="arch-arrow" aria-hidden="true">→</span>
+                                <span class="arch-node">venda-service<i>:8081 · producer</i></span>
+                                <span class="arch-arrow" aria-hidden="true">→</span>
+                                <span class="arch-node is-broker">kafka<i>:9092 · KRaft</i></span>
+                                <span class="arch-arrow" aria-hidden="true">→</span>
+                                <span class="arch-node">estoque-service<i>:8080 · consumer</i></span>
+                            </div>
+
+                            <ul class="project-facts">
+                                <li data-pt="Consumidor pode cair sem derrubar o sistema: o broker retém os eventos e o offset do grupo retoma exatamente de onde parou."
+                                    data-en="The consumer can go down without taking the system with it: the broker retains events and the group offset resumes exactly where it stopped.">
+                                    Consumidor pode cair sem derrubar o sistema: o broker retém os eventos e o offset do
+                                    grupo retoma exatamente de onde parou.</li>
+                                <li data-pt="BFFs separados para web e mobile, cada um agregando o payload no formato que a tela precisa."
+                                    data-en="Separate BFFs for web and mobile, each aggregating the payload in the exact shape the screen needs.">
+                                    BFFs separados para web e mobile, cada um agregando o payload no formato que a tela
+                                    precisa.</li>
+                                <li data-pt="Stack completa em Docker Compose — broker KRaft (sem Zookeeper), Kafka UI e os três serviços sobem com um comando."
+                                    data-en="Full stack in Docker Compose — KRaft broker (no Zookeeper), Kafka UI and all three services start with a single command.">
+                                    Stack completa em Docker Compose — broker KRaft (sem Zookeeper), Kafka UI e os três
+                                    serviços sobem com um comando.</li>
+                            </ul>
+
+                            <div class="project-actions">
+                                <a href="https://github.com/GuilhermeSalles/MS-Pratice" target="_blank"
+                                    rel="noopener noreferrer" class="project-link">GitHub</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Java Ecommerce -->
+                    <article class="project-card glass reveal">
+                        <div class="project-image">
+                            <img src="assets/img/java-ecommerce.png" alt="Java Ecommerce Backend" class="pj-img" loading="lazy" decoding="async">
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags"><span>Java</span> <span>Spring Boot</span> <span>JPA</span></div>
+                            <h3>Java E-commerce</h3>
+                            <p data-pt="Arquitetura robusta de backend para vendas escaláveis com Spring."
+                                data-en="Robust backend architecture for scalable sales with Spring.">Arquitetura
+                                robusta de backend para vendas escaláveis com Spring.</p>
+                            <div class="project-actions">
+                                <a href="https://github.com/GuilhermeSalles/Java-Ecommerce" target="_blank" rel="noopener noreferrer"
+                                    class="project-link">GitHub</a>
+                                <a href="https://www.linkedin.com/feed/update/urn:li:activity:7433136665193463809/"
+                                    target="_blank" rel="noopener noreferrer" class="project-link">LinkedIn Post</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- MS-JAVA Microservices -->
+                    <article class="project-card glass reveal">
+                        <div class="project-image">
+                            <div class="img-placeholder">MS-JAVA Microservices</div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags"><span>Java</span> <span>Spring Cloud</span> <span>Microservices</span>
+                            </div>
+                            <h3>MS-JAVA Microservices</h3>
+                            <p data-pt="Ecossistema de microsserviços com Eureka, API Gateway (Zuul), Ribbon, OpenFeign e Hystrix para descoberta de serviços e tolerância a falhas."
+                                data-en="Microservices ecosystem with Eureka, API Gateway (Zuul), Ribbon, OpenFeign and Hystrix for service discovery and fault tolerance.">Ecossistema
+                                de microsserviços com Eureka, API Gateway (Zuul), Ribbon, OpenFeign e Hystrix para
+                                descoberta de serviços e tolerância a falhas.</p>
+                            <div class="project-actions">
+                                <a href="https://github.com/GuilhermeSalles/MS-JAVA" target="_blank" rel="noopener noreferrer"
+                                    class="project-link">GitHub</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- DSList Frontend -->
+                    <article class="project-card glass reveal">
+                        <div class="project-image">
+                            <img src="assets/img/dslist-front.png" alt="DSList Frontend" class="pj-img" loading="lazy" decoding="async">
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags"><span>React</span> <span>TypeScript</span> <span>UI/UX</span>
+                            </div>
+                            <h3>DSList Frontend</h3>
+                            <p data-pt="Interface moderna e responsiva para listagem de games, integrada a uma API robusta."
+                                data-en="Modern and responsive interface for game listing, integrated with a robust API.">
+                                Interface moderna e responsiva para listagem de games, integrada a uma API robusta.</p>
+                            <div class="project-actions">
+                                <a href="https://github.com/GuilhermeSalles/DS-List-Front" target="_blank" rel="noopener noreferrer"
+                                    class="project-link">GitHub</a>
+                                <a href="https://www.linkedin.com/feed/update/urn:li:activity:7266118302643408897/"
+                                    target="_blank" rel="noopener noreferrer" class="project-link">LinkedIn Post</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- DSList Backend -->
+                    <article class="project-card glass reveal">
+                        <div class="project-image">
+                            <img src="assets/img/gifdslist.gif" alt="DSList Backend API" class="pj-img" loading="lazy" decoding="async">
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags"><span>Java</span> <span>Spring Boot</span> <span>PostgreSQL</span>
+                            </div>
+                            <h3>DSList Backend API</h3>
+                            <p data-pt="API REST otimizada para ranking e categorização de games com persistência de dados."
+                                data-en="REST API optimized for game ranking and categorization with data persistence.">
+                                API REST otimizada para ranking e categorização de games com persistência de dados.</p>
+                            <div class="project-actions">
+                                <a href="https://github.com/GuilhermeSalles/DSList" target="_blank" rel="noopener noreferrer"
+                                    class="project-link">GitHub</a>
+                                <a href="https://www.linkedin.com/feed/update/urn:li:activity:7266118302643408897/"
+                                    target="_blank" rel="noopener noreferrer" class="project-link">LinkedIn Post</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Spring Batch Optimization -->
+                    <article class="project-card glass reveal">
+                        <div class="project-image">
+                            <div class="img-placeholder">Spring Batch Pro</div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags"><span>Java</span> <span>Spring Batch</span>
+                                <span>Performance</span>
+                            </div>
+                            <h3>Spring Batch Optimization</h3>
+                            <p data-pt="Implementação de otimizações de alta performance para processamento batch em larga escala."
+                                data-en="Implementation of high-performance optimizations for large-scale batch processing.">
+                                Implementação de otimizações de alta performance para processamento batch em larga
+                                escala.</p>
+                            <a href="https://www.linkedin.com/feed/update/urn:li:activity:7420208988769882114/"
+                                target="_blank" rel="noopener noreferrer" class="project-link">LinkedIn Post</a>
+                        </div>
+                    </article>
+
+                    <!-- Agenda de Lives -->
+                    <article class="project-card glass reveal">
+                        <div class="project-image">
+                            <div class="img-placeholder">Agenda de Lives</div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags"><span>Java</span> <span>Spring</span> <span>React</span></div>
+                            <h3>Agenda de Lives</h3>
+                            <p data-pt="Sistema de gerenciamento e agendamento de transmissões ao vivo."
+                                data-en="System for management and scheduling of live streams.">Sistema de gerenciamento
+                                e agendamento de transmissões ao vivo.</p>
+                            <div class="project-actions">
+                                <a href="https://github.com/GuilhermeSalles/Agenda-de-Lives" target="_blank" rel="noopener noreferrer"
+                                    class="project-link">GitHub</a>
+                                <a href="https://www.linkedin.com/feed/update/urn:li:activity:7267951969430876160/"
+                                    target="_blank" rel="noopener noreferrer" class="project-link">LinkedIn Post</a>
+                            </div>
+                        </div>
+                    </article>
+
                     <!-- Bewear -->
                     <article class="project-card glass reveal">
                         <div class="project-image">
@@ -520,46 +712,6 @@
                         </div>
                     </article>
 
-                    <!-- Java Ecommerce -->
-                    <article class="project-card glass reveal">
-                        <div class="project-image">
-                            <img src="assets/img/java-ecommerce.png" alt="Java Ecommerce Backend" class="pj-img" loading="lazy" decoding="async">
-                        </div>
-                        <div class="project-content">
-                            <div class="project-tags"><span>Java</span> <span>Spring Boot</span> <span>JPA</span></div>
-                            <h3>Java E-commerce</h3>
-                            <p data-pt="Arquitetura robusta de backend para vendas escaláveis com Spring."
-                                data-en="Robust backend architecture for scalable sales with Spring.">Arquitetura
-                                robusta de backend para vendas escaláveis com Spring.</p>
-                            <div class="project-actions">
-                                <a href="https://github.com/GuilhermeSalles/Java-Ecommerce" target="_blank" rel="noopener noreferrer"
-                                    class="project-link">GitHub</a>
-                                <a href="https://www.linkedin.com/feed/update/urn:li:activity:7433136665193463809/"
-                                    target="_blank" rel="noopener noreferrer" class="project-link">LinkedIn Post</a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- MS-JAVA Microservices -->
-                    <article class="project-card glass reveal">
-                        <div class="project-image">
-                            <div class="img-placeholder">MS-JAVA Microservices</div>
-                        </div>
-                        <div class="project-content">
-                            <div class="project-tags"><span>Java</span> <span>Spring Cloud</span> <span>Microservices</span>
-                            </div>
-                            <h3>MS-JAVA Microservices</h3>
-                            <p data-pt="Ecossistema de microsserviços com Eureka, API Gateway (Zuul), Ribbon, OpenFeign e Hystrix para descoberta de serviços e tolerância a falhas."
-                                data-en="Microservices ecosystem with Eureka, API Gateway (Zuul), Ribbon, OpenFeign and Hystrix for service discovery and fault tolerance.">Ecossistema
-                                de microsserviços com Eureka, API Gateway (Zuul), Ribbon, OpenFeign e Hystrix para
-                                descoberta de serviços e tolerância a falhas.</p>
-                            <div class="project-actions">
-                                <a href="https://github.com/GuilhermeSalles/MS-JAVA" target="_blank" rel="noopener noreferrer"
-                                    class="project-link">GitHub</a>
-                            </div>
-                        </div>
-                    </article>
-
                     <!-- Site Crochê -->
                     <article class="project-card glass reveal">
                         <div class="project-image">
@@ -608,87 +760,6 @@
                                 <a href="https://www.linkedin.com/feed/update/urn:li:activity:7265083350241923072/"
                                     target="_blank" rel="noopener noreferrer" class="project-link">LinkedIn Post</a>
                             </div>
-                        </div>
-                    </article>
-
-                    <!-- Agenda de Lives -->
-                    <article class="project-card glass reveal">
-                        <div class="project-image">
-                            <div class="img-placeholder">Agenda de Lives</div>
-                        </div>
-                        <div class="project-content">
-                            <div class="project-tags"><span>Java</span> <span>Spring</span> <span>React</span></div>
-                            <h3>Agenda de Lives</h3>
-                            <p data-pt="Sistema de gerenciamento e agendamento de transmissões ao vivo."
-                                data-en="System for management and scheduling of live streams.">Sistema de gerenciamento
-                                e agendamento de transmissões ao vivo.</p>
-                            <div class="project-actions">
-                                <a href="https://github.com/GuilhermeSalles/Agenda-de-Lives" target="_blank" rel="noopener noreferrer"
-                                    class="project-link">GitHub</a>
-                                <a href="https://www.linkedin.com/feed/update/urn:li:activity:7267951969430876160/"
-                                    target="_blank" rel="noopener noreferrer" class="project-link">LinkedIn Post</a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- DSList Frontend -->
-                    <article class="project-card glass reveal">
-                        <div class="project-image">
-                            <img src="assets/img/dslist-front.png" alt="DSList Frontend" class="pj-img" loading="lazy" decoding="async">
-                        </div>
-                        <div class="project-content">
-                            <div class="project-tags"><span>React</span> <span>TypeScript</span> <span>UI/UX</span>
-                            </div>
-                            <h3>DSList Frontend</h3>
-                            <p data-pt="Interface moderna e responsiva para listagem de games, integrada a uma API robusta."
-                                data-en="Modern and responsive interface for game listing, integrated with a robust API.">
-                                Interface moderna e responsiva para listagem de games, integrada a uma API robusta.</p>
-                            <div class="project-actions">
-                                <a href="https://github.com/GuilhermeSalles/DS-List-Front" target="_blank" rel="noopener noreferrer"
-                                    class="project-link">GitHub</a>
-                                <a href="https://www.linkedin.com/feed/update/urn:li:activity:7266118302643408897/"
-                                    target="_blank" rel="noopener noreferrer" class="project-link">LinkedIn Post</a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- DSList Backend -->
-                    <article class="project-card glass reveal">
-                        <div class="project-image">
-                            <img src="assets/img/gifdslist.gif" alt="DSList Backend API" class="pj-img" loading="lazy" decoding="async">
-                        </div>
-                        <div class="project-content">
-                            <div class="project-tags"><span>Java</span> <span>Spring Boot</span> <span>PostgreSQL</span>
-                            </div>
-                            <h3>DSList Backend API</h3>
-                            <p data-pt="API REST otimizada para ranking e categorização de games com persistência de dados."
-                                data-en="REST API optimized for game ranking and categorization with data persistence.">
-                                API REST otimizada para ranking e categorização de games com persistência de dados.</p>
-                            <div class="project-actions">
-                                <a href="https://github.com/GuilhermeSalles/DSList" target="_blank" rel="noopener noreferrer"
-                                    class="project-link">GitHub</a>
-                                <a href="https://www.linkedin.com/feed/update/urn:li:activity:7266118302643408897/"
-                                    target="_blank" rel="noopener noreferrer" class="project-link">LinkedIn Post</a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Spring Batch Optimization -->
-                    <article class="project-card glass reveal">
-                        <div class="project-image">
-                            <div class="img-placeholder">Spring Batch Pro</div>
-                        </div>
-                        <div class="project-content">
-                            <div class="project-tags"><span>Java</span> <span>Spring Batch</span>
-                                <span>Performance</span>
-                            </div>
-                            <h3>Spring Batch Optimization</h3>
-                            <p data-pt="Implementação de otimizações de alta performance para processamento batch em larga escala."
-                                data-en="Implementation of high-performance optimizations for large-scale batch processing.">
-                                Implementação de otimizações de alta performance para processamento batch em larga
-                                escala.</p>
-                            <a href="https://www.linkedin.com/feed/update/urn:li:activity:7420208988769882114/"
-                                target="_blank" rel="noopener noreferrer" class="project-link">LinkedIn Post</a>
                         </div>
                     </article>
 
