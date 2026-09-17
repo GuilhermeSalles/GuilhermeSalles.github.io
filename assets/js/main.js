@@ -1,33 +1,38 @@
 // Advanced ScrollReveal Configuration
-const sr = ScrollReveal({
-  origin: "bottom",
-  distance: "60px",
-  duration: 2000,
-  delay: 200,
-  easing: "cubic-bezier(0.16, 1, 0.3, 1)",
-  reset: false,
-  viewFactor: 0.15,
-  afterReveal: (el) => {
-    el.classList.add("sr-finished");
-    // Trigger counter if the revealed element is a counter-card or contains a count class
-    const counter = el.querySelector(".count");
-    if (counter) {
-      startCounter(counter);
-    }
-  },
-});
+// `.reveal` is `visibility: hidden` in CSS until ScrollReveal unhides it, so if
+// the CDN fails we must reveal everything ourselves or the page renders blank.
+if (typeof ScrollReveal === "undefined") {
+  document
+    .querySelectorAll(".reveal")
+    .forEach((el) => el.classList.add("sr-finished"));
+} else {
+  const sr = ScrollReveal({
+    origin: "bottom",
+    distance: "60px",
+    duration: 2000,
+    delay: 200,
+    easing: "cubic-bezier(0.16, 1, 0.3, 1)",
+    reset: false,
+    viewFactor: 0.15,
+    afterReveal: (el) => {
+      el.classList.add("sr-finished");
+      // Trigger counters if the revealed element is (or contains) a counter
+      el.querySelectorAll(".count").forEach(startCounter);
+    },
+  });
 
-// Reveal Targets (hero title now uses its own word-by-word animation)
-sr.reveal(".reveal", { interval: 100 });
-sr.reveal(".status-pill", { delay: 300 });
-sr.reveal(".hero-subtitle", { delay: 700 });
-sr.reveal(".hero-actions", { delay: 900 });
-sr.reveal(".counter-card", { interval: 200, delay: 1100, scale: 0.9 });
-sr.reveal(".section-label, .section-title", { interval: 100 });
-sr.reveal(".stack-grid", { delay: 300 });
-sr.reveal(".stack-item", { interval: 80, scale: 0.8 });
-sr.reveal(".timeline-item", { interval: 200, origin: "left" });
-sr.reveal(".project-card", { interval: 150, scale: 0.9 });
+  // Reveal Targets (hero title now uses its own word-by-word animation)
+  sr.reveal(".reveal", { interval: 100 });
+  sr.reveal(".status-pill", { delay: 300 });
+  sr.reveal(".hero-subtitle", { delay: 700 });
+  sr.reveal(".hero-actions", { delay: 900 });
+  sr.reveal(".counter-card", { interval: 200, delay: 1100, scale: 0.9 });
+  sr.reveal(".section-label, .section-title", { interval: 100 });
+  sr.reveal(".stack-grid", { delay: 300 });
+  sr.reveal(".stack-item", { interval: 80, scale: 0.8 });
+  sr.reveal(".timeline-item", { interval: 200, origin: "left" });
+  sr.reveal(".project-card", { interval: 150, scale: 0.9 });
+}
 
 // Fast Rolling Number Animation Logic
 const startCounter = (counter) => {
@@ -58,6 +63,33 @@ const startCounter = (counter) => {
   };
 
   requestAnimationFrame(animate);
+};
+
+// Counters must always land on their real value, even if ScrollReveal never
+// fires afterReveal for them (CDN failure, element already in the viewport on
+// load, reduced motion). IntersectionObserver drives them independently.
+const initCounters = () => {
+  const counters = document.querySelectorAll(".count");
+  if (!counters.length) return;
+
+  if (!("IntersectionObserver" in window)) {
+    counters.forEach(startCounter);
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        observer.unobserve(entry.target);
+        // Wait out the ScrollReveal delay so the roll-up plays while the card
+        // fades in; startCounter is idempotent if afterReveal got there first.
+        setTimeout(() => startCounter(entry.target), 1200);
+      });
+    },
+    { threshold: 0.4 },
+  );
+  counters.forEach((counter) => observer.observe(counter));
 };
 
 // Language Switch Logic
@@ -405,6 +437,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initMagnetic();
   initTimelineProgress();
   initSpotlight();
+  initCounters();
   initLanguage();
   initScrollSpy();
   initMobileMenu();
