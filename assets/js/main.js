@@ -1,38 +1,5 @@
-// Advanced ScrollReveal Configuration
-// `.reveal` is `visibility: hidden` in CSS until ScrollReveal unhides it, so if
-// the CDN fails we must reveal everything ourselves or the page renders blank.
-if (typeof ScrollReveal === "undefined") {
-  document
-    .querySelectorAll(".reveal")
-    .forEach((el) => el.classList.add("sr-finished"));
-} else {
-  const sr = ScrollReveal({
-    origin: "bottom",
-    distance: "60px",
-    duration: 2000,
-    delay: 200,
-    easing: "cubic-bezier(0.16, 1, 0.3, 1)",
-    reset: false,
-    viewFactor: 0.15,
-    afterReveal: (el) => {
-      el.classList.add("sr-finished");
-      // Trigger counters if the revealed element is (or contains) a counter
-      el.querySelectorAll(".count").forEach(startCounter);
-    },
-  });
-
-  // Reveal Targets (hero title now uses its own word-by-word animation)
-  sr.reveal(".reveal", { interval: 100 });
-  sr.reveal(".status-pill", { delay: 300 });
-  sr.reveal(".hero-subtitle", { delay: 700 });
-  sr.reveal(".hero-actions", { delay: 900 });
-  sr.reveal(".counter-card", { interval: 200, delay: 1100, scale: 0.9 });
-  sr.reveal(".section-label, .section-title", { interval: 100 });
-  sr.reveal(".stack-grid", { delay: 300 });
-  sr.reveal(".stack-item", { interval: 80, scale: 0.8 });
-  sr.reveal(".timeline-item", { interval: 200, origin: "left" });
-  sr.reveal(".project-card", { interval: 150, scale: 0.9 });
-}
+// Reveal-on-scroll now lives in experience.js (initReveals), built on
+// IntersectionObserver instead of the ScrollReveal CDN.
 
 // Fast Rolling Number Animation Logic
 const startCounter = (counter) => {
@@ -64,6 +31,8 @@ const startCounter = (counter) => {
 
   requestAnimationFrame(animate);
 };
+// experience.js fires counters when its agent commits the counter zone
+window.startCounter = startCounter;
 
 // Counters must always land on their real value, even if ScrollReveal never
 // fires afterReveal for them (CDN failure, element already in the viewport on
@@ -314,26 +283,6 @@ const initTilt = () => {
   });
 };
 
-// Buttons — magnetic pull toward the cursor
-const initMagnetic = () => {
-  if (isTouchDevice || prefersReducedMotion) return;
-  document.querySelectorAll(".btn, .nav-cta").forEach((el) => {
-    el.addEventListener(
-      "mousemove",
-      (e) => {
-        const r = el.getBoundingClientRect();
-        const x = (e.clientX - r.left - r.width / 2) * 0.22;
-        const y = (e.clientY - r.top - r.height / 2) * 0.35;
-        el.style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px)`;
-      },
-      { passive: true },
-    );
-    el.addEventListener("mouseleave", () => {
-      el.style.transform = "";
-    });
-  });
-};
-
 // Timeline — line draws itself as you scroll, dots light up
 const initTimelineProgress = () => {
   const track = document.querySelector(".timeline-track");
@@ -434,7 +383,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initHeroParallax();
   initCardGlow();
   initTilt();
-  initMagnetic();
   initTimelineProgress();
   initSpotlight();
   initCounters();

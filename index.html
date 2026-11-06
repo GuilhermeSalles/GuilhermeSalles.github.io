@@ -39,19 +39,22 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=Syne:wght@700;800&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Syne:wght@700;800&display=swap"
         rel="stylesheet">
 
     <!-- DevIcons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
 
+    <!-- Mark JS as available so build-zones may start hidden; without JS they stay visible -->
+    <script>document.documentElement.classList.add("js");</script>
     <link rel="stylesheet" href="assets/css/style.css">
-    <script src="https://unpkg.com/scrollreveal"></script>
 </head>
 
 <body class="dark-mode" data-lang="pt">
     <div class="noise-overlay"></div>
+    <div class="grid-backdrop" aria-hidden="true"></div>
     <div class="spotlight"></div>
+    <div class="spotlight-2" aria-hidden="true"></div>
 
     <div id="scroll-progress" aria-hidden="true"></div>
 
@@ -61,7 +64,9 @@
             <div class="nav-right">
                 <ul class="nav-links">
                     <li><a href="#about" data-pt="Sobre" data-en="About">Sobre</a></li>
+                    <li><a href="#system" data-pt="Sistema" data-en="System">Sistema</a></li>
                     <li><a href="#stack" data-pt="Tecnologias" data-en="Techs">Tecnologias</a></li>
+                    <li><a href="#console" data-pt="Console" data-en="Console">Console</a></li>
                     <li><a href="#timeline" data-pt="Carreira" data-en="Career">Carreira</a></li>
                     <li><a href="#projects" data-pt="Projetos" data-en="Projects">Projetos</a></li>
                 </ul>
@@ -84,7 +89,9 @@
         <button class="nav-drawer-close" id="nav-drawer-close" aria-label="Fechar menu">✕</button>
         <ul>
             <li><a href="#about" data-pt="Sobre" data-en="About">Sobre</a></li>
+            <li><a href="#system" data-pt="Sistema" data-en="System">Sistema</a></li>
             <li><a href="#stack" data-pt="Tecnologias" data-en="Techs">Tecnologias</a></li>
+            <li><a href="#console" data-pt="Console" data-en="Console">Console</a></li>
             <li><a href="#timeline" data-pt="Carreira" data-en="Career">Carreira</a></li>
             <li><a href="#projects" data-pt="Projetos" data-en="Projects">Projetos</a></li>
         </ul>
@@ -103,26 +110,33 @@
             </div>
             <div class="container hero-inner">
                 <div class="hero-content">
-                    <div class="status-pill reveal" data-pt="Disponível para novos projetos"
-                        data-en="Available for new projects">Disponível para novos projetos</div>
-                    <h1 class="hero-title" id="hero-title">
+                    <div class="status-pill build-zone" data-build="pending" data-zone="1"
+                        data-pt="Disponível para novos projetos" data-en="Available for new projects">Disponível para
+                        novos projetos</div>
+                    <h1 class="hero-title build-zone" id="hero-title" data-build="pending" data-zone="0">
                         Guilherme <span class="accent">Baltazar</span><br>
                         <span class="dim">Backend Software Engineer</span>
                     </h1>
-                    <p class="hero-subtitle reveal"
+                    <p class="hero-subtitle build-zone" data-build="pending" data-zone="2"
                         data-pt="Desenho e sustento o backend de sistemas críticos: arquitetura antes da primeira linha de código e IA generativa como acelerador, dentro dos padrões que eu defino."
                         data-en="I design and sustain the backend of mission-critical systems: architecture before the first line of code, and generative AI as an accelerator — inside the standards I define.">
                         Desenho e sustento o backend de sistemas críticos: arquitetura antes da primeira linha de
                         código e IA generativa como acelerador, dentro dos padrões que eu defino.
                     </p>
-                    <div class="hero-actions reveal">
+                    <div class="hero-actions build-zone" data-build="pending" data-zone="3">
                         <a href="#projects" class="btn primary" data-pt="Ver Portfólio" data-en="View Portfolio">Ver
                             Portfólio</a>
                         <a href="https://wa.me/5519983223688?text=Ol%C3%A1%20Guilherme%2C%20vi%20seu%20portf%C3%B3lio%20e%20gostaria%20de%20conversar%21"
                             class="btn secondary" target="_blank" rel="noopener noreferrer">WhatsApp</a>
                     </div>
+                    <div class="governance-stamp" id="governance-stamp">
+                        <span class="dot" aria-hidden="true"></span>
+                        <span data-pt="arquitetura definida por mim · código gerado sob contrato"
+                            data-en="architecture defined by me · code generated under contract">arquitetura definida
+                            por mim · código gerado sob contrato</span>
+                    </div>
                 </div>
-                <div class="hero-counters reveal">
+                <div class="hero-counters build-zone" data-build="pending" data-zone="4">
                     <div class="counter-card glass">
                         <div class="num-wrap"><span class="count" data-target="7">0</span><span class="suffix">+</span>
                         </div>
@@ -139,6 +153,8 @@
                     </div>
                 </div>
             </div>
+            <!-- Agents that select and commit each zone on load -->
+            <div class="agent-layer" id="agent-layer" aria-hidden="true"></div>
             <div class="scroll-cue" aria-hidden="true">
                 <span class="scroll-cue-wheel"></span>
             </div>
@@ -150,7 +166,7 @@
                 <div class="about-grid">
                     <div class="about-visual reveal">
                         <div class="premium-frame glass">
-                            <img src="assets/img/perfil.png" alt="Guilherme Baltazar" class="profile-img">
+                            <img src="assets/img/perfil-2026.png" alt="Guilherme Baltazar" class="profile-img" width="640" height="640">
                         </div>
                     </div>
                     <div class="about-text">
@@ -184,12 +200,183 @@
                         </p>
 
                         <div class="highlight-box reveal"
-                            data-pt="&quot;Entrego como dono do resultado: o que eu construo precisa se sustentar em produção, não só passar no build.&quot;"
-                            data-en="&quot;I deliver as the owner of the outcome: what I build has to hold up in production, not just pass the build.&quot;">
-                            "Entrego como dono do resultado: o que eu construo precisa se sustentar em produção, não só
-                            passar no build."
+                            data-pt="&quot;Penso como dono: me coloco no lugar de quem vai conviver com o sistema, antecipo onde ele vai doer e construo para isso — não para fechar o ticket.&quot;"
+                            data-en="&quot;I think like an owner: I put myself in the place of whoever has to live with the system, anticipate where it will hurt, and build for that — not to close the ticket.&quot;">
+                            "Penso como dono: me coloco no lugar de quem vai conviver com o sistema, antecipo onde
+                            ele vai doer e construo para isso — não para fechar o ticket."
+                        </div>
+                        <div class="about-pillars">
+                            <div class="pillar reveal" style="--pillar-color:var(--accent)">
+                                <span class="pillar-n">01</span>
+                                <h3 data-pt="Backend — a raiz" data-en="Backend — the roots">Backend — a raiz</h3>
+                                <p data-pt="Java e Spring há mais de 7 anos. Hoje respondo tecnicamente por um sistema governamental de alto volume rodando em produção."
+                                    data-en="Java and Spring for over 7 years. Today I am the technical owner of a high-volume government system running in production.">Java e Spring há mais de 7 anos. Hoje respondo tecnicamente por um sistema governamental de alto volume rodando em produção.</p>
+                            </div>
+                            <div class="pillar reveal" style="--pillar-color:var(--accent-2)">
+                                <span class="pillar-n">02</span>
+                                <h3 data-pt="Front-end — a ponta" data-en="Front-end — the last mile">Front-end — a ponta</h3>
+                                <p data-pt="React, Next.js e TypeScript. Os produtos deste portfólio estão no ar com a interface feita por mim — consigo acompanhar um produto do banco de dados até a tela."
+                                    data-en="React, Next.js and TypeScript. The products in this portfolio are live with interfaces I built myself — I can follow a product from the database all the way to the screen.">React, Next.js e TypeScript. Os produtos deste portfólio estão no ar com a interface feita por mim — consigo acompanhar um produto do banco de dados até a tela.</p>
+                            </div>
+                            <div class="pillar reveal" style="--pillar-color:var(--accent-3)">
+                                <span class="pillar-n">03</span>
+                                <h3 data-pt="Entrega — o depois" data-en="Delivery — the after">Entrega — o depois</h3>
+                                <p data-pt="Docker, GitLab CI e observabilidade. Para mim a entrega não acaba no merge: acaba quando o sistema se sustenta sozinho em produção."
+                                    data-en="Docker, GitLab CI and observability. Delivery doesn't end at the merge: it ends when the system holds up on its own in production.">Docker, GitLab CI e observabilidade. Para mim a entrega não acaba no merge: acaba quando o sistema se sustenta sozinho em produção.</p>
+                            </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SYSTEM — the architecture assembles itself as you scroll -->
+        <section id="system">
+            <div class="system-scroll" id="system-scroll">
+                <div class="system-stage">
+                    <div class="system-head">
+                        <span class="section-label" data-pt="02. Sistema" data-en="02. System">02. Sistema</span>
+                        <h2 data-pt="Como eu monto um backend." data-en="How I assemble a backend.">Como eu monto um
+                            backend.</h2>
+                    </div>
+
+                    <div class="system-scene">
+                        <div class="system-world" id="system-world">
+                            <div class="system-floor"></div>
+
+                            <!-- wires are injected by JS from the node graph -->
+
+                            <div class="sys-node" data-stage="1" style="--x:-300px; --y:150px; --h:70px; --node-color:#818cf8">
+                                <div class="sys-pad"></div>
+                                <div class="sys-pillar"></div>
+                                <div class="sys-card">
+                                    <span class="k">client</span>
+                                    <span class="n" data-pt="Web · Mobile" data-en="Web · Mobile">Web · Mobile</span>
+                                    <span class="m">HTTPS</span>
+                                </div>
+                            </div>
+
+                            <div class="sys-node" data-stage="2" style="--x:-100px; --y:70px; --h:120px; --node-color:#22d3ee">
+                                <div class="sys-pad"></div>
+                                <div class="sys-pillar"></div>
+                                <div class="sys-card">
+                                    <span class="k">edge</span>
+                                    <span class="n">API Gateway</span>
+                                    <span class="m">Spring Security · JWT</span>
+                                </div>
+                            </div>
+
+                            <div class="sys-node" data-stage="3" style="--x:120px; --y:-60px; --h:150px; --node-color:#22d3ee">
+                                <div class="sys-pad"></div>
+                                <div class="sys-pillar"></div>
+                                <div class="sys-card">
+                                    <span class="k">service</span>
+                                    <span class="n" data-pt="Serviço de Domínio" data-en="Domain Service">Serviço de
+                                        Domínio</span>
+                                    <span class="m">Java 17 · Spring Boot</span>
+                                </div>
+                            </div>
+
+                            <div class="sys-node" data-stage="3" style="--x:110px; --y:200px; --h:130px; --node-color:#22d3ee">
+                                <div class="sys-pad"></div>
+                                <div class="sys-pillar"></div>
+                                <div class="sys-card">
+                                    <span class="k">service</span>
+                                    <span class="n" data-pt="Rotinas Batch" data-en="Batch Routines">Rotinas
+                                        Batch</span>
+                                    <span class="m">Spring Batch</span>
+                                </div>
+                            </div>
+
+                            <div class="sys-node" data-stage="4" style="--x:330px; --y:60px; --h:185px; --node-color:#a3e635">
+                                <div class="sys-pad"></div>
+                                <div class="sys-pillar"></div>
+                                <div class="sys-card">
+                                    <span class="k">broker</span>
+                                    <span class="n">Apache Kafka</span>
+                                    <span class="m" data-pt="eventos · offsets" data-en="events · offsets">eventos ·
+                                        offsets</span>
+                                </div>
+                            </div>
+
+                            <div class="sys-node" data-stage="5" style="--x:330px; --y:-150px; --h:150px; --node-color:#34d399">
+                                <div class="sys-pad"></div>
+                                <div class="sys-pillar"></div>
+                                <div class="sys-card">
+                                    <span class="k">data</span>
+                                    <span class="n">PostgreSQL · Oracle</span>
+                                    <span class="m">Spring Data · JPA</span>
+                                </div>
+                            </div>
+
+                            <div class="sys-node" data-stage="6" style="--x:-130px; --y:-150px; --h:155px; --node-color:#34d399">
+                                <div class="sys-pad"></div>
+                                <div class="sys-pillar"></div>
+                                <div class="sys-card">
+                                    <span class="k">delivery</span>
+                                    <span class="n">CI/CD · Observabilidade</span>
+                                    <span class="m">GitLab CI · Kibana</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="system-caption" id="system-caption">
+                        <div class="cap" data-step="0">
+                            <b data-pt="Passo 00 · Requisito" data-en="Step 00 · Requirement">Passo 00 · Requisito</b>
+                            <span data-pt="Antes de qualquer código, o terreno: o que o sistema precisa aguentar, onde ele pode quebrar e quanto custa errar."
+                                data-en="Before any code, the ground: what the system has to withstand, where it can break, and what a mistake costs.">Antes
+                                de qualquer código, o terreno: o que o sistema precisa aguentar, onde ele pode quebrar e
+                                quanto custa errar.</span>
+                        </div>
+                        <div class="cap" data-step="1">
+                            <b data-pt="Passo 01 · Fronteira" data-en="Step 01 · Boundary">Passo 01 · Fronteira</b>
+                            <span data-pt="Quem consome define o contrato. Web e mobile entram pelo mesmo acordo explícito, versionado e testado."
+                                data-en="Whoever consumes defines the contract. Web and mobile come in through the same explicit, versioned, tested agreement.">Quem
+                                consome define o contrato. Web e mobile entram pelo mesmo acordo explícito, versionado e
+                                testado.</span>
+                        </div>
+                        <div class="cap" data-step="2">
+                            <b data-pt="Passo 02 · Porta de entrada" data-en="Step 02 · Front door">Passo 02 · Porta de
+                                entrada</b>
+                            <span data-pt="Autenticação, autorização e limites ficam na borda — nenhum serviço de domínio precisa saber como você entrou."
+                                data-en="Authentication, authorization and limits live at the edge — no domain service needs to know how you got in.">Autenticação,
+                                autorização e limites ficam na borda — nenhum serviço de domínio precisa saber como você
+                                entrou.</span>
+                        </div>
+                        <div class="cap" data-step="3">
+                            <b data-pt="Passo 03 · Domínio" data-en="Step 03 · Domain">Passo 03 · Domínio</b>
+                            <span data-pt="Serviços pequenos, com responsabilidade única e código legível. O que roda em lote fica separado do que responde em tempo real."
+                                data-en="Small services with a single responsibility and readable code. What runs in batch stays separate from what answers in real time.">Serviços
+                                pequenos, com responsabilidade única e código legível. O que roda em lote fica separado
+                                do que responde em tempo real.</span>
+                        </div>
+                        <div class="cap" data-step="4">
+                            <b data-pt="Passo 04 · Desacoplamento" data-en="Step 04 · Decoupling">Passo 04 ·
+                                Desacoplamento</b>
+                            <span data-pt="Eventos no lugar de chamadas diretas. Um consumidor pode cair que o broker segura a fila e o offset retoma de onde parou."
+                                data-en="Events instead of direct calls. A consumer can go down: the broker holds the queue and the offset resumes where it stopped.">Eventos
+                                no lugar de chamadas diretas. Um consumidor pode cair que o broker segura a fila e o
+                                offset retoma de onde parou.</span>
+                        </div>
+                        <div class="cap" data-step="5">
+                            <b data-pt="Passo 05 · Persistência" data-en="Step 05 · Persistence">Passo 05 ·
+                                Persistência</b>
+                            <span data-pt="O dado é o ativo. Modelagem, índices e queries sob medida — performance aqui é a diferença entre segundos e horas."
+                                data-en="Data is the asset. Modelling, indexes and hand-tuned queries — performance here is the difference between seconds and hours.">O
+                                dado é o ativo. Modelagem, índices e queries sob medida — performance aqui é a diferença
+                                entre segundos e horas.</span>
+                        </div>
+                        <div class="cap" data-step="6">
+                            <b data-pt="Passo 06 · Produção" data-en="Step 06 · Production">Passo 06 · Produção</b>
+                            <span data-pt="Nada existe até estar em produção e observável. Pipeline, logs e métricas fecham o ciclo — e é aqui que a arquitetura prova que estava certa."
+                                data-en="Nothing exists until it is in production and observable. Pipeline, logs and metrics close the loop — this is where the architecture proves it was right.">Nada
+                                existe até estar em produção e observável. Pipeline, logs e métricas fecham o ciclo — e é
+                                aqui que a arquitetura prova que estava certa.</span>
+                        </div>
+                    </div>
+
+                    <div class="system-rail" id="system-rail" aria-hidden="true"></div>
                 </div>
             </div>
         </section>
@@ -197,125 +384,186 @@
         <!-- STACK -->
         <section id="stack">
             <div class="container">
-                <span class="section-label reveal">02. Stack</span>
-                <h2 class="section-title reveal" data-pt="Ferramentas & Tecnologias" data-en="Tools & Technologies">
-                    Ferramentas & Tecnologias</h2>
-                <div class="stack-grid">
-                    <!-- Core backend — Java & Spring -->
-                    <div class="stack-item glass reveal">
-                        <i class="devicon-java-plain colored"></i>
-                        <span>Java</span>
-                    </div>
-                    <div class="stack-item glass reveal">
-                        <i class="devicon-spring-original colored"></i>
-                        <span>Spring Boot</span>
-                    </div>
-                    <div class="stack-item glass reveal">
-                        <i class="devicon-spring-original colored"></i>
-                        <span>Spring Data</span>
-                    </div>
+                <span class="section-label reveal">03. Stack</span>
+                <h2 class="section-title reveal" data-pt="A caixa de ferramentas, por camada."
+                    data-en="The toolbox, layer by layer.">A caixa de ferramentas, por camada.</h2>
+                <p class="stack-intro reveal"
+                    data-pt="Backend é onde eu moro. Front-end é o que me deixa entregar o produto inteiro, sem depender de ninguém para fechar a ponta."
+                    data-en="Backend is where I live. Front-end is what lets me deliver the whole product without depending on anyone to close the loop.">
+                    Backend é onde eu moro. Front-end é o que me deixa entregar o produto inteiro, sem depender de
+                    ninguém para fechar a ponta.</p>
 
-                    <!-- Event-Driven & Distributed -->
-                    <div class="stack-item glass reveal">
-                        <i class="devicon-apachekafka-original"></i>
-                        <span>Apache Kafka</span>
+                <div class="stack-tiers">
+                    <!-- tier: core -->
+                    <div class="stack-tier" data-tier="core" style="--tier-color:var(--accent)">
+                        <div class="tier-head">
+                            <span class="tier-n">01</span>
+                            <span class="tier-name" data-pt="Núcleo backend" data-en="Backend core">Núcleo backend</span>
+                            <span class="tier-note" data-pt="onde eu tenho raiz" data-en="where my roots are">onde eu tenho raiz</span>
+                        </div>
+                        <div class="tier-rail" aria-hidden="true"></div>
+                        <div class="tier-items">
+                            <div class="stack-item glass">
+                                <i class="devicon-java-plain colored"></i>
+                                <span>Java</span>
+                            </div>
+                            <div class="stack-item glass">
+                                <i class="devicon-spring-original colored"></i>
+                                <span>Spring Boot</span>
+                            </div>
+                            <div class="stack-item glass">
+                                <i class="devicon-spring-original colored"></i>
+                                <span>Spring Data</span>
+                            </div>
+                            <div class="stack-item glass">
+                                <i class="devicon-spring-original colored"></i>
+                                <span>Spring Batch</span>
+                            </div>
+                            <div class="stack-item glass">
+                                <i class="devicon-spring-original colored"></i>
+                                <span>Spring Cloud</span>
+                            </div>
+                            <div class="stack-item glass">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="4.5" r="2.5" />
+                                    <circle cx="4.5" cy="17" r="2.5" />
+                                    <circle cx="19.5" cy="17" r="2.5" />
+                                    <path d="M10.1 6.4 6.4 14.9M13.9 6.4l3.7 8.5M7 17h10" />
+                                </svg>
+                                <span>Microservices</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="stack-item glass reveal">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#38bdf8"
-                            stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="4.5" r="2.5" />
-                            <circle cx="4.5" cy="17" r="2.5" />
-                            <circle cx="19.5" cy="17" r="2.5" />
-                            <path d="M10.1 6.4 6.4 14.9M13.9 6.4l3.7 8.5M7 17h10" />
-                        </svg>
-                        <span>Microservices</span>
+                    <!-- tier: data -->
+                    <div class="stack-tier" data-tier="data" style="--tier-color:var(--accent-warm)">
+                        <div class="tier-head">
+                            <span class="tier-n">02</span>
+                            <span class="tier-name" data-pt="Dados & mensageria" data-en="Data & messaging">Dados & mensageria</span>
+                            <span class="tier-note" data-pt="o que sustenta a escala" data-en="what carries the scale">o que sustenta a escala</span>
+                        </div>
+                        <div class="tier-rail" aria-hidden="true"></div>
+                        <div class="tier-items">
+                            <div class="stack-item glass">
+                                <i class="devicon-apachekafka-original"></i>
+                                <span>Apache Kafka</span>
+                            </div>
+                            <div class="stack-item glass">
+                                <i class="devicon-postgresql-plain colored"></i>
+                                <span>PostgreSQL</span>
+                            </div>
+                            <div class="stack-item glass">
+                                <i class="devicon-oracle-original colored"></i>
+                                <span>Oracle DB</span>
+                            </div>
+                            <div class="stack-item glass">
+                                <i class="devicon-prisma-original"></i>
+                                <span>Prisma ORM</span>
+                            </div>
+                            <div class="stack-item glass">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="#2ac224" viewBox="0 0 24 24">
+                                    <!--Boxicons v3.0.8 https://boxicons.com | License  https://docs.boxicons.com/free-->
+                                    <path d="M6.13 10.67c.42.24.57.77.33 1.19l-2.82 4.92c-.24.42-.78.57-1.2.33a.87.87 0 0 1-.33-1.19L4.93 11c.24-.42.78-.57 1.2-.33M12.21 6.9c.42.24.57.77.33 1.19l-2.82 4.92c-.24.42-.78.57-1.2.33a.87.87 0 0 1-.33-1.19l2.82-4.92c.24-.42.78-.57 1.2-.33M21.56 6.9c.42.24.57.77.33 1.19l-2.82 4.92c-.24.42-.78.57-1.2.33a.87.87 0 0 1-.33-1.19l2.82-4.92c.24-.42.78-.57 1.2-.33M15.48 10.67c.42.24.57.77.33 1.19l-2.82 4.92c-.24.42-.78.57-1.2.33a.87.87 0 0 1-.33-1.19L14.28 11c.24-.42.78-.57 1.2-.33" />
+                                </svg>
+                                <span>Drizzle ORM</span>
+                            </div>
+                        </div>
                     </div>
+                    <!-- tier: ship -->
+                    <div class="stack-tier" data-tier="ship" style="--tier-color:var(--accent-3)">
+                        <div class="tier-head">
+                            <span class="tier-n">03</span>
+                            <span class="tier-name" data-pt="Entrega & infra" data-en="Delivery & infra">Entrega & infra</span>
+                            <span class="tier-note" data-pt="do commit à produção" data-en="from commit to production">do commit à produção</span>
+                        </div>
+                        <div class="tier-rail" aria-hidden="true"></div>
+                        <div class="tier-items">
+                            <div class="stack-item glass">
+                                <i class="devicon-docker-plain colored"></i>
+                                <span>Docker</span>
+                            </div>
+                            <div class="stack-item glass">
+                                <i class="devicon-gitlab-plain colored"></i>
+                                <span>GitLab CI/CD</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- tier: front -->
+                    <div class="stack-tier" data-tier="front" style="--tier-color:var(--accent-2)">
+                        <div class="tier-head">
+                            <span class="tier-n">04</span>
+                            <span class="tier-name" data-pt="Front-end" data-en="Front-end">Front-end</span>
+                            <span class="tier-note" data-pt="o que fecha o full stack" data-en="what closes the full stack">o que fecha o full stack</span>
+                        </div>
+                        <div class="tier-rail" aria-hidden="true"></div>
+                        <div class="tier-items">
+                            <div class="stack-item glass">
+                                <i class="devicon-react-original colored"></i>
+                                <span>React</span>
+                            </div>
+                            <div class="stack-item glass">
+                                <i class="devicon-nextjs-plain"></i>
+                                <span>Next.js</span>
+                            </div>
+                            <div class="stack-item glass">
+                                <i class="devicon-tailwindcss-original colored"></i>
+                                <span>Tailwind CSS</span>
+                            </div>
+                            <div class="stack-item glass">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                    <!--Boxicons v3.0.8 https://boxicons.com | License  https://docs.boxicons.com/free-->
+                                    <path d="m19.01 11.55-7.46 7.46c-.46.46-.46 1.19 0 1.65a1.16 1.16 0 0 0 1.64 0l7.46-7.46c.46-.46.46-1.19 0-1.65s-1.19-.46-1.65 0ZM19.17 3.34c-.46-.46-1.19-.46-1.65 0L3.34 17.52c-.46.46-.46 1.19 0 1.65a1.16 1.16 0 0 0 1.64 0L19.16 4.99c.46-.46.46-1.19 0-1.65Z" />
+                                </svg>
+                                <span>shadcn/ui</span>
+                            </div>
+                            <div class="stack-item glass">
+                                <i class="devicon-bootstrap-plain colored"></i>
+                                <span>Bootstrap</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- tier: also -->
+                    <div class="stack-tier" data-tier="also" style="--tier-color:var(--text-dim)">
+                        <div class="tier-head">
+                            <span class="tier-n">05</span>
+                            <span class="tier-name" data-pt="Também entrego em" data-en="I also ship in">Também entrego em</span>
+                            <span class="tier-note" data-pt="quando o projeto pede" data-en="when the project calls for it">quando o projeto pede</span>
+                        </div>
+                        <div class="tier-rail" aria-hidden="true"></div>
+                        <div class="tier-items">
+                            <div class="stack-item glass">
+                                <i class="devicon-nodejs-plain colored"></i>
+                                <span>Node.js</span>
+                            </div>
+                            <div class="stack-item glass">
+                                <i class="devicon-php-plain colored"></i>
+                                <span>PHP</span>
+                            </div>
+                            <div class="stack-item glass">
+                                <i class="devicon-laravel-original colored"></i>
+                                <span>Laravel</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- CONSOLE — a terminal that types the summary out -->
+        <section id="console">
+            <div class="container">
+                <span class="section-label reveal">04. Console</span>
+                <h2 class="section-title reveal" data-pt="Em texto puro, sem marketing."
+                    data-en="In plain text, no marketing.">Em texto puro, sem marketing.</h2>
+                <p class="console-intro reveal"
+                    data-pt="Se você é da área, talvez prefira ler assim."
+                    data-en="If you're technical, you might prefer to read it like this.">
+                    Se você é da área, talvez prefira ler assim.</p>
 
-                    <!-- Data & Delivery -->
-                    <div class="stack-item glass reveal">
-                        <i class="devicon-postgresql-plain colored"></i>
-                        <span>PostgreSQL</span>
+                <div class="terminal reveal" id="terminal">
+                    <div class="term-bar">
+                        <span class="term-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                        <span class="term-title">guilherme@portfolio — powershell</span>
                     </div>
-                    <div class="stack-item glass reveal">
-                        <i class="devicon-docker-plain colored"></i>
-                        <span>Docker</span>
-                    </div>
-                    <div class="stack-item glass reveal">
-                        <i class="devicon-gitlab-plain colored"></i>
-                        <span>GitLab CI/CD</span>
-                    </div>
-
-                    <!-- Spring — batch & distributed -->
-                    <div class="stack-item glass reveal">
-                        <i class="devicon-spring-original colored"></i>
-                        <span>Spring Batch</span>
-                    </div>
-                    <div class="stack-item glass reveal">
-                        <i class="devicon-spring-original colored"></i>
-                        <span>Spring Cloud</span>
-                    </div>
-                    <div class="stack-item glass reveal">
-                        <i class="devicon-oracle-original colored"></i>
-                        <span>Oracle DB</span>
-                    </div>
-
-                    <!-- JavaScript Ecosystem -->
-                    <div class="stack-item glass reveal">
-                        <i class="devicon-nodejs-plain colored"></i>
-                        <span>Node.js</span>
-                    </div>
-                    <div class="stack-item glass reveal">
-                        <i class="devicon-nextjs-plain"></i>
-                        <span>Next.js</span>
-                    </div>
-                    <div class="stack-item glass reveal">
-                        <i class="devicon-react-original colored"></i>
-                        <span>React</span>
-                    </div>
-
-                    <!-- ORMs & Data -->
-                    <div class="stack-item glass reveal">
-                        <i class="devicon-prisma-original"></i>
-                        <span>Prisma ORM</span>
-                    </div>
-                    <div class="stack-item glass reveal">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="#2ac224"
-                            viewBox="0 0 24 24">
-                            <!--Boxicons v3.0.8 https://boxicons.com | License  https://docs.boxicons.com/free-->
-                            <path
-                                d="M6.13 10.67c.42.24.57.77.33 1.19l-2.82 4.92c-.24.42-.78.57-1.2.33a.87.87 0 0 1-.33-1.19L4.93 11c.24-.42.78-.57 1.2-.33M12.21 6.9c.42.24.57.77.33 1.19l-2.82 4.92c-.24.42-.78.57-1.2.33a.87.87 0 0 1-.33-1.19l2.82-4.92c.24-.42.78-.57 1.2-.33M21.56 6.9c.42.24.57.77.33 1.19l-2.82 4.92c-.24.42-.78.57-1.2.33a.87.87 0 0 1-.33-1.19l2.82-4.92c.24-.42.78-.57 1.2-.33M15.48 10.67c.42.24.57.77.33 1.19l-2.82 4.92c-.24.42-.78.57-1.2.33a.87.87 0 0 1-.33-1.19L14.28 11c.24-.42.78-.57 1.2-.33" />
-                        </svg>
-                        <span>Drizzle ORM</span>
-                    </div>
-
-                    <!-- PHP & Frameworks -->
-                    <div class="stack-item glass reveal">
-                        <i class="devicon-php-plain colored"></i>
-                        <span>PHP</span>
-                    </div>
-                    <div class="stack-item glass reveal">
-                        <i class="devicon-laravel-original colored"></i>
-                        <span>Laravel</span>
-                    </div>
-                    <div class="stack-item glass reveal">
-                        <i class="devicon-bootstrap-plain colored"></i>
-                        <span>Bootstrap</span>
-                    </div>
-
-                    <!-- UI -->
-                    <div class="stack-item glass reveal">
-                        <i class="devicon-tailwindcss-original colored"></i>
-                        <span>Tailwind CSS</span>
-                    </div>
-                    <div class="stack-item glass reveal">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                            viewBox="0 0 24 24">
-                            <!--Boxicons v3.0.8 https://boxicons.com | License  https://docs.boxicons.com/free-->
-                            <path
-                                d="m19.01 11.55-7.46 7.46c-.46.46-.46 1.19 0 1.65a1.16 1.16 0 0 0 1.64 0l7.46-7.46c.46-.46.46-1.19 0-1.65s-1.19-.46-1.65 0ZM19.17 3.34c-.46-.46-1.19-.46-1.65 0L3.34 17.52c-.46.46-.46 1.19 0 1.65a1.16 1.16 0 0 0 1.64 0L19.16 4.99c.46-.46.46-1.19 0-1.65Z" />
-                        </svg>
-                        <span>shadcn/ui</span>
-                    </div>
+                    <pre class="term-body" id="term-body" aria-live="polite"></pre>
                 </div>
             </div>
         </section>
@@ -323,7 +571,7 @@
         <!-- TIMELINE -->
         <section id="timeline">
             <div class="container">
-                <span class="section-label reveal" data-pt="03. Carreira" data-en="03. Career">03. Carreira</span>
+                <span class="section-label reveal" data-pt="05. Carreira" data-en="05. Career">05. Carreira</span>
                 <h2 class="section-title reveal" data-pt="Trajetória de Impacto." data-en="Impactful Journey.">
                     Trajetória de Impacto.</h2>
                 <div class="timeline-track">
@@ -332,7 +580,7 @@
                     <div class="timeline-item reveal">
                         <div class="time-dot"></div>
                         <div class="time-content">
-                            <span class="time-year">Dez 2024 — Presente</span>
+                            <span class="time-year is-now"><i class="now-dot" aria-hidden="true"></i><span data-pt="Dez 2024 — Presente" data-en="Dec 2024 — Present">Dez 2024 — Presente</span></span>
                             <h3 data-pt="Desenvolvedor Java Pleno - Cast Group"
                                 data-en="Mid-level Java Developer - Cast Group">Desenvolvedor Java Pleno - Cast Group
                             </h3>
@@ -365,6 +613,7 @@
                                         Exponho APIs RESTful seguras que integram ecossistemas governamentais e
                                         destravam a modernização de sistemas legados.</li>
                                 </ul>
+                                <div class="time-chips"><span>Java 17</span><span>Spring Boot</span><span>Spring Batch</span><span>JPA/Hibernate</span><span>Oracle</span><span>Kibana</span></div>
                             </div>
                         </div>
                     </div>
@@ -373,7 +622,7 @@
                     <div class="timeline-item reveal">
                         <div class="time-dot"></div>
                         <div class="time-content">
-                            <span class="time-year">Ago 2023 — Dez 2024</span>
+                            <span class="time-year" data-pt="Ago 2023 — Dez 2024" data-en="Aug 2023 — Dec 2024">Ago 2023 — Dez 2024</span>
                             <h3 data-pt="Analista de Sistemas - Fundação FUMEC"
                                 data-en="Systems Analyst - FUMEC Foundation">Analista de Sistemas - Fundação FUMEC</h3>
                             <p class="time-location">Campinas, SP</p>
@@ -393,6 +642,7 @@
                                         Otimização de arquiteturas em Node.js e implementação de melhorias em protocolos
                                         de segurança e redes.</li>
                                 </ul>
+                                <div class="time-chips"><span>Node.js</span><span>Arquitetura</span><span>Redes & Segurança</span></div>
                             </div>
                         </div>
                     </div>
@@ -401,7 +651,7 @@
                     <div class="timeline-item reveal">
                         <div class="time-dot"></div>
                         <div class="time-content">
-                            <span class="time-year">Set 2021 — Ago 2023</span>
+                            <span class="time-year" data-pt="Set 2021 — Ago 2023" data-en="Sep 2021 — Aug 2023">Set 2021 — Ago 2023</span>
                             <h3 data-pt="Técnico de Suporte em TI - CEPROCAMP / FUMEC"
                                 data-en="IT Support Technician - CEPROCAMP / FUMEC">Técnico de Suporte em TI - CEPROCAMP
                                 / FUMEC</h3>
@@ -416,6 +666,7 @@
                                         Criação de relatórios de desempenho e automação de fluxos de atendimento para
                                         funcionários públicos.</li>
                                 </ul>
+                                <div class="time-chips"><span>Sistemas internos</span><span>Automação</span><span>Suporte técnico</span></div>
                             </div>
                         </div>
                     </div>
@@ -424,7 +675,7 @@
                     <div class="timeline-item reveal">
                         <div class="time-dot"></div>
                         <div class="time-content">
-                            <span class="time-year">Set 2019 — Set 2021</span>
+                            <span class="time-year" data-pt="Set 2019 — Set 2021" data-en="Sep 2019 — Sep 2021">Set 2019 — Set 2021</span>
                             <h3 data-pt="Estagiário em TI - CEPROCAMP" data-en="IT Intern - CEPROCAMP">Estagiário em TI
                                 - CEPROCAMP</h3>
                             <div class="time-details">
@@ -438,15 +689,16 @@
                                         Início da arquitetura do sistema de gestão de patrimônio e suporte técnico
                                         preventivo.</li>
                                 </ul>
+                                <div class="time-chips"><span>HTML/CSS</span><span>JavaScript</span><span>Portal institucional</span></div>
                             </div>
                         </div>
                     </div>
 
                     <!-- EDUCATION -->
-                    <div class="timeline-item reveal">
+                    <div class="timeline-item is-education reveal">
                         <div class="time-dot"></div>
                         <div class="time-content">
-                            <span class="time-year">2019 — 2022</span>
+                            <span class="time-year" data-pt="2019 — 2022" data-en="2019 — 2022">2019 — 2022</span>
                             <h3 data-pt="Bacharel em Ciência da Computação" data-en="B.S. in Computer Science">Bacharel
                                 em Ciência da Computação</h3>
                             <p class="time-location" data-pt="Formação Superior Completa - UNIP"
@@ -482,61 +734,10 @@
         <!-- PROJECTS -->
         <section id="projects">
             <div class="container">
-                <span class="section-label reveal">04. Works</span>
+                <span class="section-label reveal">06. Works</span>
                 <h2 class="section-title reveal" data-pt="Portfólio de Projetos" data-en="Project Portfolio">Portfólio
                     de Projetos</h2>
                 <div class="project-grid">
-
-                    <!-- MS-Pratice — Kafka / Event-Driven / BFF (destaque) -->
-                    <article class="project-card glass reveal featured">
-                        <div class="project-image">
-                            <img src="assets/img/ms-pratice.png" alt="MS-Pratice — painel do BFF exibindo o log de offsets do tópico Kafka"
-                                class="pj-img" loading="lazy" decoding="async">
-                            <span class="project-badge" data-pt="Destaque" data-en="Featured">Destaque</span>
-                        </div>
-                        <div class="project-content">
-                            <div class="project-tags"><span>Apache Kafka</span> <span>BFF</span>
-                                <span>Microservices</span> <span>Java 21</span> <span>Spring Boot</span>
-                                <span>Docker</span>
-                            </div>
-                            <h3 data-pt="Microserviços" data-en="Microservices">Microserviços</h3>
-                            <p data-pt="Ecossistema orientado a eventos onde cada venda vira um offset no log do Kafka. Um BFF entrega respostas prontas para web e mobile, enquanto produtor e consumidor evoluem desacoplados."
-                                data-en="Event-driven ecosystem where every sale becomes an offset in the Kafka log. A BFF delivers ready-made responses for web and mobile, while producer and consumer evolve fully decoupled.">
-                                Ecossistema orientado a eventos onde cada venda vira um offset no log do Kafka. Um BFF
-                                entrega respostas prontas para web e mobile, enquanto produtor e consumidor evoluem
-                                desacoplados.</p>
-
-                            <div class="arch-flow">
-                                <span class="arch-node">bff-service<i>:8082 · web + mobile</i></span>
-                                <span class="arch-arrow" aria-hidden="true">→</span>
-                                <span class="arch-node">venda-service<i>:8081 · producer</i></span>
-                                <span class="arch-arrow" aria-hidden="true">→</span>
-                                <span class="arch-node is-broker">kafka<i>:9092 · KRaft</i></span>
-                                <span class="arch-arrow" aria-hidden="true">→</span>
-                                <span class="arch-node">estoque-service<i>:8080 · consumer</i></span>
-                            </div>
-
-                            <ul class="project-facts">
-                                <li data-pt="Consumidor pode cair sem derrubar o sistema: o broker retém os eventos e o offset do grupo retoma exatamente de onde parou."
-                                    data-en="The consumer can go down without taking the system with it: the broker retains events and the group offset resumes exactly where it stopped.">
-                                    Consumidor pode cair sem derrubar o sistema: o broker retém os eventos e o offset do
-                                    grupo retoma exatamente de onde parou.</li>
-                                <li data-pt="BFFs separados para web e mobile, cada um agregando o payload no formato que a tela precisa."
-                                    data-en="Separate BFFs for web and mobile, each aggregating the payload in the exact shape the screen needs.">
-                                    BFFs separados para web e mobile, cada um agregando o payload no formato que a tela
-                                    precisa.</li>
-                                <li data-pt="Stack completa em Docker Compose — broker KRaft (sem Zookeeper), Kafka UI e os três serviços sobem com um comando."
-                                    data-en="Full stack in Docker Compose — KRaft broker (no Zookeeper), Kafka UI and all three services start with a single command.">
-                                    Stack completa em Docker Compose — broker KRaft (sem Zookeeper), Kafka UI e os três
-                                    serviços sobem com um comando.</li>
-                            </ul>
-
-                            <div class="project-actions">
-                                <a href="https://github.com/GuilhermeSalles/MS-Pratice" target="_blank"
-                                    rel="noopener noreferrer" class="project-link">GitHub</a>
-                            </div>
-                        </div>
-                    </article>
 
                     <!-- Java Ecommerce -->
                     <article class="project-card glass reveal">
@@ -561,7 +762,7 @@
                     <!-- MS-JAVA Microservices -->
                     <article class="project-card glass reveal">
                         <div class="project-image">
-                            <div class="img-placeholder">MS-JAVA Microservices</div>
+                            <div class="img-placeholder" data-glyph="MS"><span class="ph-label">MS-JAVA Microservices</span></div>
                         </div>
                         <div class="project-content">
                             <div class="project-tags"><span>Java</span> <span>Spring Cloud</span> <span>Microservices</span>
@@ -623,7 +824,7 @@
                     <!-- Spring Batch Optimization -->
                     <article class="project-card glass reveal">
                         <div class="project-image">
-                            <div class="img-placeholder">Spring Batch Pro</div>
+                            <div class="img-placeholder" data-glyph="SB"><span class="ph-label">Spring Batch Pro</span></div>
                         </div>
                         <div class="project-content">
                             <div class="project-tags"><span>Java</span> <span>Spring Batch</span>
@@ -642,7 +843,7 @@
                     <!-- Agenda de Lives -->
                     <article class="project-card glass reveal">
                         <div class="project-image">
-                            <div class="img-placeholder">Agenda de Lives</div>
+                            <div class="img-placeholder" data-glyph="AL"><span class="ph-label">Agenda de Lives</span></div>
                         </div>
                         <div class="project-content">
                             <div class="project-tags"><span>Java</span> <span>Spring</span> <span>React</span></div>
@@ -789,7 +990,7 @@
                     <!-- Laravel Sales -->
                     <article class="project-card glass reveal">
                         <div class="project-image">
-                            <div class="img-placeholder">Laravel Sales</div>
+                            <div class="img-placeholder" data-glyph="LS"><span class="ph-label">Laravel Sales</span></div>
                         </div>
                         <div class="project-content">
                             <div class="project-tags"><span>Laravel</span> <span>PHP</span> <span>MySQL</span></div>
@@ -809,16 +1010,56 @@
         <!-- CONTACT -->
         <section id="contact">
             <div class="container">
-                <div class="contact-box glass reveal">
-                    <h2 class="section-title" data-pt="Vamos criar algo grande?" data-en="Let's build something big?">
-                        Vamos criar algo grande?</h2>
-                    <div class="contact-links">
-                        <a href="https://www.linkedin.com/in/guilhermebaltazar-v/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-                        <a href="https://github.com/GuilhermeSalles" target="_blank" rel="noopener noreferrer">GitHub</a>
-                        <a href="mailto:guibaltazarvs@hotmail.com">Email</a>
-                        <a href="https://wa.me/5519983223688?text=Ol%C3%A1%20Guilherme%2C%20vi%20seu%20portf%C3%B3lio%20e%20gostaria%20de%20conversar%21"
-                            class="accent-link" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+                <div class="contact-wrap reveal">
+                    <span class="contact-status">
+                        <i class="now-dot" aria-hidden="true"></i>
+                        <span data-pt="Disponível para novos projetos"
+                            data-en="Available for new projects">Disponível para novos projetos</span>
+                    </span>
+                    <h2 class="contact-title" data-pt="Vamos conversar sobre o seu backend."
+                        data-en="Let's talk about your backend.">Vamos conversar sobre o seu backend.</h2>
+                    <p class="contact-sub"
+                        data-pt="Aberto a conversar sobre backend Java, arquitetura e produto. Respondo rápido."
+                        data-en="Open to talking about Java backend, architecture and product. I reply fast.">
+                        Aberto a conversar sobre backend Java, arquitetura e produto. Respondo rápido.</p>
+
+                    <div class="contact-actions">
+                        <a href="https://wa.me/5519983223688?text=Ol%C3%A1%20Guilherme%2C%20vi%20seu%20portf%C3%B3lio%20e%20gostaria%20de%20conversar%21" class="btn primary" target="_blank" rel="noopener noreferrer"
+                            data-pt="Chamar no WhatsApp" data-en="Message on WhatsApp">Chamar no WhatsApp</a>
+                        <a href="mailto:guibaltazarvs@hotmail.com" class="btn secondary"
+                            data-pt="Enviar e-mail" data-en="Send an email">Enviar e-mail</a>
                     </div>
+
+                    <ul class="contact-rows">
+                        <li>
+                            <a href="https://www.linkedin.com/in/guilhermebaltazar-v/" target="_blank"
+                                rel="noopener noreferrer">
+                                <span class="cr-k">LinkedIn</span>
+                                <span class="cr-v">/in/guilhermebaltazar-v</span>
+                                <span class="cr-go" aria-hidden="true">↗</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/GuilhermeSalles" target="_blank" rel="noopener noreferrer">
+                                <span class="cr-k">GitHub</span>
+                                <span class="cr-v">/GuilhermeSalles</span>
+                                <span class="cr-go" aria-hidden="true">↗</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="mailto:guibaltazarvs@hotmail.com">
+                                <span class="cr-k">E-mail</span>
+                                <span class="cr-v">guibaltazarvs@hotmail.com</span>
+                                <span class="cr-go" aria-hidden="true">↗</span>
+                            </a>
+                        </li>
+                        <li>
+                            <span class="cr-static">
+                                <span class="cr-k" data-pt="Base" data-en="Based in">Base</span>
+                                <span class="cr-v">Campinas, SP · Brasil</span>
+                            </span>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </section>
@@ -837,6 +1078,7 @@
     </button>
 
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/experience.js"></script>
 </body>
 
 </html>
