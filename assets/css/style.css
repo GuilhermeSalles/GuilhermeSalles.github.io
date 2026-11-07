@@ -242,11 +242,11 @@ header.scrolled nav {
 /* Titles Architecture */
 .hero-title {
   font-family: var(--font-display);
-  font-size: clamp(2.5rem, 8vw, 4.2rem);
+  font-size: clamp(2.6rem, 8.5vw, 4.6rem);
   font-weight: 800;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-  margin-bottom: 1.5rem;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.7rem;
 }
 
 .section-title {
@@ -284,9 +284,6 @@ header.scrolled nav {
   font-size: 0.7rem;
   color: var(--text-secondary);
   margin-bottom: 2rem;
-}
-.dim {
-  color: var(--text-dim);
 }
 .hero-subtitle {
   font-size: 1.1rem;
@@ -3202,5 +3199,25 @@ footer {
   .contact-actions .btn {
     flex: 1 1 100%;
     text-align: center;
+  }
+}
+
+/* ================================================================
+   HERO ROLE — the title as a quiet label, not a second headline
+   ================================================================ */
+.hero-role {
+  font-family: var(--font-mono);
+  font-size: clamp(0.7rem, 1.6vw, 0.8rem);
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 1.6rem;
+}
+
+@media (max-width: 700px) {
+  .hero-role {
+    letter-spacing: 0.16em;
+    margin-bottom: 1.3rem;
   }
 }
