@@ -258,31 +258,6 @@ const initCardGlow = () => {
   });
 };
 
-// Project cards — 3D tilt (Apple TV style)
-const initTilt = () => {
-  if (isTouchDevice || prefersReducedMotion) return;
-  document.querySelectorAll(".project-card").forEach((card) => {
-    let raf = null;
-    card.addEventListener(
-      "mousemove",
-      (e) => {
-        if (raf) return;
-        raf = requestAnimationFrame(() => {
-          const r = card.getBoundingClientRect();
-          const x = (e.clientX - r.left) / r.width - 0.5;
-          const y = (e.clientY - r.top) / r.height - 0.5;
-          card.style.transform = `perspective(900px) rotateX(${(-y * 4).toFixed(2)}deg) rotateY(${(x * 5).toFixed(2)}deg) translateY(-4px)`;
-          raf = null;
-        });
-      },
-      { passive: true },
-    );
-    card.addEventListener("mouseleave", () => {
-      card.style.transform = "";
-    });
-  });
-};
-
 // Timeline — line draws itself as you scroll, dots light up
 const initTimelineProgress = () => {
   const track = document.querySelector(".timeline-track");
@@ -382,7 +357,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initHeaderScroll();
   initHeroParallax();
   initCardGlow();
-  initTilt();
   initTimelineProgress();
   initSpotlight();
   initCounters();
